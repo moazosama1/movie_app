@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/widgets/list_tab_bar.dart';
 
+// ignore: must_be_immutable
 class CustomTabBar extends StatelessWidget {
   CustomTabBar({super.key, this.onTap});
 
