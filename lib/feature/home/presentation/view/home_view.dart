@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/widgets/button_nav_bar_item.dart';
 import 'package:movie_app/core/utils/constant.dart';
 import 'package:movie_app/core/utils/image_path.dart';
-import 'package:movie_app/core/utils/list_screen.dart';
+import 'package:movie_app/core/widgets/list_screen.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

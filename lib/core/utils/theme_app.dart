@@ -5,6 +5,11 @@ import 'package:movie_app/core/utils/color_app.dart';
 class ThemeApp {
   static ThemeData themeDark = ThemeData(
       fontFamily: GoogleFonts.notoSans().fontFamily,
+      appBarTheme: AppBarTheme(
+          backgroundColor: ColorApp.transparentColor,
+          elevation: 0,
+          centerTitle: true,
+          iconTheme: IconThemeData(color: ColorApp.primaryColor)),
       useMaterial3: true,
       scaffoldBackgroundColor: ColorApp.backgroundApp,
       colorScheme: ColorScheme.fromSeed(
@@ -31,17 +36,10 @@ class ThemeApp {
           enableFeedback: true,
           elevation: 0),
       textTheme: TextTheme(
-        labelLarge: TextStyle(
-          fontSize: 22,
-          color: ColorApp.whiteColor
-        ),
-        labelMedium: TextStyle(
-          fontSize: 18,
-          color: ColorApp.whiteColor
-        ),
-        labelSmall: TextStyle(
-          fontSize: 14,
-          color: ColorApp.whiteColor
-        ),
+        titleMedium: TextStyle(fontSize: 24, color: ColorApp.whiteColor),
+        titleSmall: TextStyle(fontSize: 20, color: ColorApp.whiteColor),
+        labelLarge: TextStyle(fontSize: 22, color: ColorApp.whiteColor),
+        labelMedium: TextStyle(fontSize: 18, color: ColorApp.whiteColor),
+        labelSmall: TextStyle(fontSize: 14, color: ColorApp.whiteColor),
       ));
 }

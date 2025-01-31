@@ -16,7 +16,7 @@ class CustomListComingSoon extends StatelessWidget {
           width: 8,
         ),
         itemBuilder: (context, index) => CustomCardComingSoon(
-          imagePath: ImagePath.tCommingSoonImage,
+          imagePath: ImagePath.tComingSoonImage,
         ),
         itemCount: 20,
         scrollDirection: Axis.horizontal,

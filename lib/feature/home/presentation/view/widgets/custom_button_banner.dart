@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/widgets/custom_button_app.dart';
 
-class CustomBannerBg extends StatelessWidget {
-  const CustomBannerBg({
+class CustomButtonBanner extends StatelessWidget {
+  const CustomButtonBanner({
     super.key,
   });
 
-
-
   @override
   Widget build(BuildContext context) {
-        var theme = Theme.of(context);
-    var mediaQuaryHeight = MediaQuery.of(context).size.height;
+    var theme = Theme.of(context);
+    var mediaQueryHeight = MediaQuery.of(context).size.height;
     return Container(
       width: double.infinity,
-      height: mediaQuaryHeight * 0.2,
+      height: mediaQueryHeight * 0.2,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.bottomCenter,
@@ -22,8 +20,7 @@ class CustomBannerBg extends StatelessWidget {
           stops: [0, 0.4, 1],
           colors: [
             theme.colorScheme.surfaceContainerLow,
-            theme.colorScheme.surfaceContainerLow
-                .withValues(alpha: 0.55),
+            theme.colorScheme.surfaceContainerLow.withValues(alpha: 0.55),
             Colors.transparent,
           ],
         ),
@@ -49,3 +46,4 @@ class CustomBannerBg extends StatelessWidget {
     );
   }
 }
+

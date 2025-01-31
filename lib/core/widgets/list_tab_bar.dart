@@ -11,3 +11,9 @@ const List<Widget> tab = [
     text: "TV Show",
   ),
 ];
+List<Widget> categoryTabs = List.generate(
+  20,
+  (index) => Tab(
+    text: "Action",
+  ),
+);

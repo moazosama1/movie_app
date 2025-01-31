@@ -7,58 +7,63 @@ class CustomMovieCard extends StatelessWidget {
     super.key,
     required this.date,
     required this.title,
-    required this.rating, required this.imagePath,
+    required this.rating,
+    required this.imagePath,
+    this.onTap,
   });
 
   final String title;
   final String date;
   final double rating;
   final String imagePath;
-
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Stack(
-          children: [
-            SizedBox(
-              height: 190,
-              child: CustomCardComingSoon(
-                imagePath: imagePath,
-                aspectRatio: 2.1 / 3,
-              ),
-            ),
-            Positioned(
-              right: 0,
-              child: Container(
-                width: 60,
-                height: 28,
-                decoration: BoxDecoration(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(8),
-                        topRight: Radius.circular(8))),
-                child: CustomRatingMovie(
-                  rating: rating,
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              SizedBox(
+                height: 190,
+                child: CustomCardComingSoon(
+                  imagePath: imagePath,
+                  aspectRatio: 2.1 / 3,
                 ),
               ),
-            )
-          ],
-        ),
-        Text(
-          title,
-          style: theme.textTheme.labelMedium!
-              .copyWith(color: theme.colorScheme.surface),
-        ),
-        Text(
-          date,
-          style: theme.textTheme.labelSmall!
-              .copyWith(color: theme.colorScheme.tertiary),
-        ),
-      ],
+              Positioned(
+                right: 0,
+                child: Container(
+                  width: 60,
+                  height: 28,
+                  decoration: BoxDecoration(
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(8),
+                          topRight: Radius.circular(8))),
+                  child: CustomRatingMovie(
+                    rating: rating,
+                  ),
+                ),
+              )
+            ],
+          ),
+          Text(
+            title,
+            style: theme.textTheme.labelMedium!
+                .copyWith(color: theme.colorScheme.surface),
+          ),
+          Text(
+            date,
+            style: theme.textTheme.labelSmall!
+                .copyWith(color: theme.colorScheme.tertiary),
+          ),
+        ],
+      ),
     );
   }
 }

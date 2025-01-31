@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/utils/list_screen.dart';
+import 'package:movie_app/core/widgets/list_screen.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_tab_bar.dart';
 
 import '../../../../../../core/widgets/list_tab_bar.dart';
@@ -29,6 +29,8 @@ class _HomeBodyState extends State<HomeBody> {
                 widget.initialIndex = value;
                 setState(() {});
               },
+              tabs: tab,
+              tabAlignment: TabAlignment.fill,
             ),
             screenTab[widget.initialIndex],
           ].reversed.toList(),
