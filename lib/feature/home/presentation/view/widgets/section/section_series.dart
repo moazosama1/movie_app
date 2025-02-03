@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/image_path.dart';
 import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_movie_card_large.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card_large.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_view_more_movie.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/list_movie_items.dart';
 

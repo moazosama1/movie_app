@@ -1,4 +1,4 @@
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_image_banner_bg.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/banner_widget/custom_image_banner_bg.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_comedies.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/image_path.dart';

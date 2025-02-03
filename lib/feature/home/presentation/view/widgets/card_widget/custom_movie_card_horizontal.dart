@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/widgets/custom_rating_movie.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_card_coming_soon.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_card_coming_soon.dart';
 
 class CustomMovieCardHorizontal extends StatelessWidget {
   const CustomMovieCardHorizontal({

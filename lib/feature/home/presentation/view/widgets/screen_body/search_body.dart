@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/image_path.dart';
 import 'package:movie_app/core/widgets/custom_text_filed.dart';
 import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_movie_card.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card.dart';
 
 class SearchBody extends StatelessWidget {
   const SearchBody({super.key});

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/image_path.dart';
-import 'package:movie_app/core/widgets/custom_button_app.dart';
-import 'package:movie_app/core/widgets/custom_rating_movie.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_bonner_movie_details.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_card_coming_soon.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_movie_card_horizontal.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/banner_widget/custom_banner_movie_details.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card_horizontal.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/custom_button_details_movie.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_movie_details_info.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_view_more_movie.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/list_movie_items.dart';
 
 class MovieDetailsBody extends StatelessWidget {
   const MovieDetailsBody({super.key});
@@ -21,7 +18,7 @@ class MovieDetailsBody extends StatelessWidget {
       children: [
         Stack(
           children: [
-            CustomBonnerMovieDetailsImage(),
+            CustomBannerMovieDetailsImage(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -33,7 +30,9 @@ class MovieDetailsBody extends StatelessWidget {
                   SizedBox(
                     height: 16,
                   ),
-                  CustomButtonActionMovieDetailsInfo(),
+                  CustomButtonDetailsMovie(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ),
                   SizedBox(
                     height: 16,
                   ),
@@ -62,30 +61,6 @@ class MovieDetailsBody extends StatelessWidget {
             ),
           ],
         ),
-      ],
-    );
-  }
-}
-
-class CustomButtonActionMovieDetailsInfo extends StatelessWidget {
-  const CustomButtonActionMovieDetailsInfo({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CustomButtonApp(
-            color: theme.colorScheme.primary,
-            title: "play",
-            icon: Icons.play_arrow_outlined),
-        CustomButtonApp(
-            color: theme.colorScheme.secondary,
-            title: "Add to List",
-            icon: Icons.add)
       ],
     );
   }
