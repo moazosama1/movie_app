@@ -1,14 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/api/api_url.dart';
+import 'package:movie_app/core/utils/image_path.dart';
+import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
+import 'package:movie_app/feature/home/data/model/tv_show_list_model/tv_show_item.dart';
+import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_button_details_movie.dart';
 
-class CustomBannerImageBg extends StatelessWidget {
-  const CustomBannerImageBg({
-    super.key,
-    required this.imagePath,
-  });
-
-  final String imagePath;
-
+class CustomBannerImageNetworkBg extends StatelessWidget {
+  const CustomBannerImageNetworkBg(
+      {super.key, this.movieItem, this.isMovie = true, this.tvItem});
+  final bool isMovie;
+  final TvShowItemModel? tvItem;
+  final MovieItem? movieItem;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -19,9 +23,13 @@ class CustomBannerImageBg extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
           image: DecorationImage(
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
         opacity: 0.5,
-        image: AssetImage(imagePath),
+        image: (movieItem?.posterPath != null || tvItem?.posterPath != null)
+            ? CachedNetworkImageProvider(ApiUrl.getImageFullPath(
+                imagePath:
+                    isMovie ? movieItem?.posterPath : tvItem?.posterPath)!)
+            : AssetImage(ImagePath.errorImage),
       )),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -41,7 +49,14 @@ class CustomBannerImageBg extends StatelessWidget {
                 ],
               ),
             ),
-            child: CustomButtonDetailsMovie(),
+            child: CustomButtonDetailsMovie(
+              iconTitle: Icons.details_rounded,
+              title: "Details",
+              onTapDetails: () {
+                // Navigator.of(context).pushNamed(MovieDetailsView.routeName,
+                //     arguments: movieItem);
+              },
+            ),
           ),
         ],
       ),

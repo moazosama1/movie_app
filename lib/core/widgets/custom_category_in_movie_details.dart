@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/feature/home/data/model/movie_details_model/movie_details_model/movie_details_model.dart';
 
 class CustomCategoryInMovieDetails extends StatelessWidget {
   const CustomCategoryInMovieDetails({
     super.key,
+    required this.movieDetails,
   });
-
+  final MovieDetailsModel? movieDetails;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -19,7 +21,7 @@ class CustomCategoryInMovieDetails extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
-              "Action",
+              movieDetails?.genres?[index].name ?? "",
               style: theme.textTheme.labelSmall,
             ),
           );
@@ -27,7 +29,7 @@ class CustomCategoryInMovieDetails extends StatelessWidget {
         separatorBuilder: (context, index) => SizedBox(
           width: 10,
         ),
-        itemCount: 20,
+        itemCount: movieDetails?.genres?.length ?? 0,
         scrollDirection: Axis.horizontal,
       ),
     );

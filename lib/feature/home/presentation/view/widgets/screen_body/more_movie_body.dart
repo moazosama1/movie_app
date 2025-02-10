@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/utils/image_path.dart';
-import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card.dart';
+import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_details/cubit/movie_details_cubit.dart';
 
 class MoreMovieBody extends StatelessWidget {
-  const MoreMovieBody({super.key});
-
+  const MoreMovieBody({super.key, required this.listMovies});
+  final List<MovieItem>? listMovies;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,16 +19,14 @@ class MoreMovieBody extends StatelessWidget {
                   crossAxisCount: 3,
                   childAspectRatio: 1.2 / 3,
                   crossAxisSpacing: 8),
-              itemCount: 30,
+              itemCount: listMovies?.length ?? 0,
               itemBuilder: (context, index) => Center(
-                child: CustomMovieCard(
-                    onTap: () {
-                      Navigator.pushNamed(context, MovieDetailsView.routeName);
-                    },
-                    date: "2023",
-                    title: "The Last Duel",
-                    rating: 7.3,
-                    imagePath: ImagePath.tActionImage),
+                child: BlocProvider(
+                  create: (context) => MovieDetailsCubit(),
+                  child: CustomMovieCardImageNetwork(
+                    movieItem: listMovies?[index],
+                  ),
+                ),
               ),
             ),
           )

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/utils/constant.dart';
 import 'package:movie_app/feature/home/presentation/view/home_view.dart';
+import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
 import 'package:movie_app/feature/splash/presentation/view/widgets/splash_body.dart';
 
 class SplashView extends StatefulWidget {
@@ -17,11 +19,13 @@ class _SplashViewState extends State<SplashView> {
     super.initState();
     Future.delayed(
       Duration(seconds: 3),
-      () => Navigator.pushNamedAndRemoveUntil(
-        context,
-        HomeView.routeName,
-        (route) => false,
-      ),
+      () {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          HomeView.routeName,
+          (route) => false,
+        );
+      },
     );
   }
 

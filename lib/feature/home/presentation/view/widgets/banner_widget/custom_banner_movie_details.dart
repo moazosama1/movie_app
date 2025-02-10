@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/api/api_url.dart';
 import 'package:movie_app/core/utils/image_path.dart';
 import 'package:movie_app/core/widgets/custom_shadow.dart';
 
 class CustomBannerMovieDetailsImage extends StatelessWidget {
-  const CustomBannerMovieDetailsImage({super.key});
-
+  const CustomBannerMovieDetailsImage({super.key, required this.imagePath});
+  final String? imagePath;
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
@@ -15,7 +16,9 @@ class CustomBannerMovieDetailsImage extends StatelessWidget {
       height: mediaQueryHeight * .3,
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(ImagePath.tMovieBgImage),
+              image: imagePath != null
+                  ? NetworkImage(ApiUrl.getImageFullPath(imagePath: imagePath)!)
+                  : AssetImage(ImagePath.errorImage),
               fit: BoxFit.cover,
               opacity: 0.7)),
       child: Column(

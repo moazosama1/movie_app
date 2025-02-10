@@ -25,4 +25,3 @@ class SplashBody extends StatelessWidget {
     );
   }
 }
-

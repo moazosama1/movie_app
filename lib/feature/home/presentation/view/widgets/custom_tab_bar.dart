@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomTabBar extends StatelessWidget {
-  CustomTabBar({super.key, this.onTap, required this.tabs, this.isScrollable, required this.tabAlignment});
+  CustomTabBar(
+      {super.key,
+      this.onTap,
+      required this.tabs,
+      this.isScrollable,
+      required this.tabAlignment});
   final List<Widget> tabs;
   void Function(int)? onTap;
   final bool? isScrollable;

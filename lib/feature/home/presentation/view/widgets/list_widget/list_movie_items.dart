@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 class ListOfMovieItems extends StatelessWidget {
   const ListOfMovieItems(
-      {super.key, required this.movieItem, required this.itemHeight, this.axis});
+      {super.key,
+      required this.movieItem,
+      required this.itemHeight,
+      this.axis});
   final Widget movieItem;
   final double itemHeight;
   final Axis? axis;

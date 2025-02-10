@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/constant.dart';
+import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/screen_body/more_movie_body.dart';
 
 class MoreMovieView extends StatelessWidget {
@@ -8,16 +9,19 @@ class MoreMovieView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final title = ModalRoute.of(context)!.settings.arguments as String;
+    final listMovie =
+        ModalRoute.of(context)!.settings.arguments as List<MovieItem>?;
     var theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          title,
+          "title",
           style: theme.textTheme.titleMedium,
         ),
       ),
-      body: MoreMovieBody(),
+      body: MoreMovieBody(
+        listMovies: listMovie,
+      ),
     );
   }
 }

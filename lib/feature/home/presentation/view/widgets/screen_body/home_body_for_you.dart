@@ -1,12 +1,13 @@
-import 'package:movie_app/feature/home/presentation/view/widgets/banner_widget/custom_image_banner_bg.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/section/section_comedies.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/utils/image_path.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/section/section_comedies.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/section/section_banner_widget.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_action_movie.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_children.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_coming_soon.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_fantasy_movie.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_series.dart';
+import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
 
 class HomeBodyForYou extends StatelessWidget {
   const HomeBodyForYou({super.key});
@@ -15,9 +16,39 @@ class HomeBodyForYou extends StatelessWidget {
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
+    var theme = Theme.of(context);
     return Column(
       children: [
-        CustomBannerImageBg(imagePath: ImagePath.tCoverImage),
+        BlocBuilder<MovieListCubit, MovieListState>(
+          builder: (context, state) {
+            switch (state) {
+              case MovieListInitial():
+                // TODO: Handle this case.
+                throw UnimplementedError();
+              case MovieListSuccess():
+                return CustomBannerWidget(
+                  isMovie: true,
+                  movieListItems: state.topRatedMovies,
+                );
+
+              case MovieListLoading():
+                return SizedBox(
+                  height: mediaQueryHeight * .4,
+                  child: Center(child: CircularProgressIndicator()),
+                );
+
+              case MovieListFailure():
+                return SizedBox(
+                  height: mediaQueryHeight * .4,
+                  child: Center(
+                      child: Text(
+                    state.errorMessage,
+                    style: theme.textTheme.labelLarge,
+                  )),
+                );
+            }
+          },
+        ),
         SizedBox(
           height: 8,
         ),

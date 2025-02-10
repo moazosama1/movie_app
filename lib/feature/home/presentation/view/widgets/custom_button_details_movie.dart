@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/widgets/custom_button_app.dart';
 
 class CustomButtonDetailsMovie extends StatelessWidget {
-  const CustomButtonDetailsMovie({super.key, required, this.mainAxisAlignment});
+  CustomButtonDetailsMovie(
+      {super.key,
+      this.mainAxisAlignment,
+      required this.title,
+      this.onTapDetails,
+      required this.iconTitle});
   final MainAxisAlignment? mainAxisAlignment;
+  final String title;
+  final IconData iconTitle;
+  void Function()? onTapDetails;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -14,10 +22,10 @@ class CustomButtonDetailsMovie extends StatelessWidget {
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.spaceEvenly,
       children: [
         CustomButtonApp(
-          title: "Play",
+          title: title,
           color: theme.colorScheme.primary,
-          icon: Icons.play_arrow_outlined,
-          onTap: () {},
+          icon: iconTitle,
+          onTap: onTapDetails,
         ),
         CustomButtonApp(
           title: "Add to List",

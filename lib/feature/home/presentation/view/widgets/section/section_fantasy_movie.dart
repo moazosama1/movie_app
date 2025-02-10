@@ -1,33 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/utils/image_path.dart';
-import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_view_more_movie.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/list_movie_items.dart';
+import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
 
 class CustomSectionFantasyMovie extends StatelessWidget {
   const CustomSectionFantasyMovie({super.key});
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomViewMoreMovie(
-          title: "Sci-fi & Fantasy",
-          onTap: () {},
-        ),
-        ListOfMovieItems(
-          itemHeight: 250,
-          movieItem: CustomMovieCard(
-            onTap: () {
-              Navigator.pushNamed(context, MovieDetailsView.routeName);
-            },
-            imagePath: ImagePath.tActionImage,
-            date: "2024",
-            title: "The Beekeeper",
-            rating: 6.7,
-          ),
-        ),
-      ],
+    var theme = Theme.of(context);
+
+    return BlocBuilder<MovieListCubit, MovieListState>(
+      builder: (context, state) {
+        switch (state) {
+          case MovieListInitial():
+            // TODO: Handle this case.
+            throw UnimplementedError();
+          case MovieListSuccess():
+            return Column(
+              children: [
+                CustomViewMoreMovie(
+                  title: "Sci-fi & Fantasy",
+                  movieList: state.fantasyListMovies,
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                SizedBox(
+                  height: 250,
+                  child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) =>
+                          CustomMovieCardImageNetwork(
+                            movieItem: state.fantasyListMovies?[index],
+                          ),
+                      separatorBuilder: (context, index) => SizedBox(
+                            width: 8,
+                          ),
+                      itemCount: state.fantasyListMovies?.length ?? 0),
+                ),
+              ],
+            );
+          case MovieListLoading():
+            return SizedBox(
+              height: 200,
+              width: double.infinity,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          case MovieListFailure():
+            return SizedBox(
+              height: 300,
+              width: double.infinity,
+              child: Center(
+                child: Text(
+                  state.errorMessage,
+                  style: theme.textTheme.labelLarge,
+                ),
+              ),
+            );
+        }
+      },
     );
   }
 }

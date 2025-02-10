@@ -6,6 +6,7 @@ class ImagePath {
   static const String bookMarkIcon = "assets/icon/Icon ionic-md-bookmarks.svg";
   static const String browseIcon = "assets/icon/Icon material-movie.svg";
   static const String tCoverImage = "assets/image/testImageCover.png";
+  static const String errorImage = "assets/image/error_image.png";
   static const String tComingSoonImage = "assets/image/coming_sone_test.png";
   static const String ratingIcon = "assets/icon/rating.svg";
   static const String tActionImage = "assets/image/test_image_action.png";

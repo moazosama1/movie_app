@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/utils/image_path.dart';
+import 'package:movie_app/core/function/custom_function.dart';
 import 'package:movie_app/core/widgets/custom_category_in_movie_details.dart';
 import 'package:movie_app/core/widgets/custom_rating_movie.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_card_coming_soon.dart';
+import 'package:movie_app/feature/home/data/model/movie_details_model/movie_details_model/movie_details_model.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_card_image_widget.dart';
 
 class CustomMovieDetailsInfo extends StatelessWidget {
   const CustomMovieDetailsInfo({
     super.key,
+    this.movieItem,
   });
-
+  final MovieDetailsModel? movieItem;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -20,18 +22,20 @@ class CustomMovieDetailsInfo extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: theme.colorScheme.surface, width: 1.2)),
-          child: CustomCardComingSoon(imagePath: ImagePath.tMoviePosterImage),
+          child: CustomImageCardWidget(imagePath: movieItem?.posterPath),
         ),
         Flexible(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Never Let Go",
+                movieItem?.originalTitle ?? "",
                 style: theme.textTheme.titleMedium,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
               Text(
-                "As an evil takes over the world beyond their front doorstep, the only protection for a mother and her twin sons is their house and their family’s protective bond.",
+                movieItem?.overview ?? "",
                 style: theme.textTheme.labelSmall!,
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
@@ -43,19 +47,22 @@ class CustomMovieDetailsInfo extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "2024",
+                    CustomFunction.gitReleaseDate(
+                        releaseDate: movieItem?.releaseDate)!,
                     style: theme.textTheme.labelSmall!
                         .copyWith(color: theme.colorScheme.tertiary),
                   ),
                   CustomRatingMovie(
-                    rating: 6.3,
+                    rating: movieItem?.voteAverage ?? 0,
                   ),
                 ],
               ),
               SizedBox(
                 height: 8,
               ),
-              CustomCategoryInMovieDetails()
+              CustomCategoryInMovieDetails(
+                movieDetails: movieItem,
+              )
             ],
           ),
         ),

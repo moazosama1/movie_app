@@ -10,7 +10,7 @@ class CustomRatingMovie extends StatelessWidget {
       this.sizeFont,
       this.mainAxisAlignment});
 
-  final double rating;
+  final double? rating;
   final double? sizeIcon;
   final double? sizeFont;
   final MainAxisAlignment? mainAxisAlignment;
@@ -27,7 +27,7 @@ class CustomRatingMovie extends StatelessWidget {
           width: sizeIcon ?? 18,
         ),
         Text(
-          "$rating",
+          rating.toString().substring(0, 3),
           style: theme.textTheme.labelMedium!.copyWith(
               color: theme.colorScheme.surface, fontSize: sizeFont ?? 18),
         )
