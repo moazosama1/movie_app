@@ -27,7 +27,6 @@ class HomeBodyForYou extends StatelessWidget {
                 throw UnimplementedError();
               case MovieListSuccess():
                 return CustomBannerWidget(
-                  isMovie: true,
                   movieListItems: state.topRatedMovies,
                 );
 

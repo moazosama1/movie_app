@@ -1,4 +1,5 @@
-import 'genre.dart';
+import 'package:movie_app/feature/home/data/model/tv_show_details_model/genre.dart';
+
 import 'production_company.dart';
 import 'production_country.dart';
 import 'spoken_language.dart';

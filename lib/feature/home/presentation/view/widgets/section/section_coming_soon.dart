@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/function/custom_function.dart';
 import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_card_image_widget.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_view_more_movie.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
 
 class CustomSectionComingSoonMovie extends StatelessWidget {
@@ -22,7 +23,6 @@ class CustomSectionComingSoonMovie extends StatelessWidget {
               children: [
                 CustomViewMoreMovie(
                   title: "Coming Soon",
-                  movieList: state.upcomingListMovies,
                 ),
                 SizedBox(
                   height: 8,
@@ -37,7 +37,8 @@ class CustomSectionComingSoonMovie extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).pushNamed(
                             MovieDetailsView.routeName,
-                            arguments: state.upcomingListMovies?[index]);
+                            arguments: CustomFunction.getPreviewItemMovieModel(
+                                movieItem: state.upcomingListMovies?[index]));
                       },
                       child: CustomImageCardWidget(
                         imagePath: state.upcomingListMovies?[index].posterPath,

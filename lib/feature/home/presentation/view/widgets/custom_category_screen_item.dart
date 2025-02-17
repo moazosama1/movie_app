@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/function/custom_function.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card_large.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_view_more_movie.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_banner_widget.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/browse/browse_cubit.dart';
 
@@ -61,7 +62,6 @@ class CustomCategoryScreenItem extends StatelessWidget {
                     children: [
                       CustomViewMoreMovie(
                         title: "Trending",
-                        movieList: state.trendingMoviesList,
                       ),
                       SizedBox(
                         height: 8,
@@ -72,7 +72,10 @@ class CustomCategoryScreenItem extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) =>
                                 CustomMovieCardImageNetwork(
-                                  movieItem: state.trendingMoviesList?[index],
+                                  previewItemModel:
+                                      CustomFunction.getPreviewItemMovieModel(
+                                    movieItem: state.trendingMoviesList?[index],
+                                  ),
                                 ),
                             separatorBuilder: (context, index) => SizedBox(
                                   width: 8,
@@ -85,7 +88,10 @@ class CustomCategoryScreenItem extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) =>
                                 CustomMovieCardImageNetwork(
-                                  movieItem: state.listMovies?[index],
+                                  previewItemModel:
+                                      CustomFunction.getPreviewItemMovieModel(
+                                    movieItem: state.listMovies?[index],
+                                  ),
                                 ),
                             separatorBuilder: (context, index) => SizedBox(
                                   width: 8,
@@ -97,7 +103,6 @@ class CustomCategoryScreenItem extends StatelessWidget {
                       ),
                       CustomViewMoreMovie(
                         title: "Latest Releases",
-                        movieList: state.lastReleaseList,
                       ),
                       SizedBox(
                         height: 8,
@@ -108,7 +113,10 @@ class CustomCategoryScreenItem extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) =>
                                 CustomMovieCardLarge(
-                                  movieItem: state.lastReleaseList?[index],
+                                  previewItemModel:
+                                      CustomFunction.getPreviewItemMovieModel(
+                                    movieItem: state.lastReleaseList?[index],
+                                  ),
                                   textTitleWidth: 180,
                                   itemWidth: mediaQueryWidth * .7,
                                   itemHeight: 0.16,

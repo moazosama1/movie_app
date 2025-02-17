@@ -1,9 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/function/custom_function.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card_large.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_view_more_movie.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
 
 class CustomSectionActionMovie extends StatelessWidget {
@@ -25,7 +26,6 @@ class CustomSectionActionMovie extends StatelessWidget {
               children: [
                 CustomViewMoreMovie(
                   title: "Action & Adventure",
-                  movieList: state.actionListMovies,
                 ),
                 SizedBox(
                   height: 8,
@@ -42,7 +42,8 @@ class CustomSectionActionMovie extends StatelessWidget {
                       textTitleWidth: 150,
                       itemHeight: mediaQueryHeight * 0.2,
                       itemWidth: mediaQueryWidth * 0.9,
-                      movieItem: state.topRatedMovies?[index],
+                      previewItemModel: CustomFunction.getPreviewItemMovieModel(
+                          movieItem: state.topRatedMovies?[index]),
                     ),
                   ),
                 ),
@@ -55,7 +56,9 @@ class CustomSectionActionMovie extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) =>
                           CustomMovieCardImageNetwork(
-                            movieItem: state.actionListMovies?[index],
+                            previewItemModel:
+                                CustomFunction.getPreviewItemMovieModel(
+                                    movieItem: state.actionListMovies?[index]),
                           ),
                       separatorBuilder: (context, index) => SizedBox(
                             width: 8,

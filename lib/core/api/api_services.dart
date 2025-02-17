@@ -4,7 +4,7 @@ import 'package:movie_app/core/api/api_url.dart';
 
 class ApiServices {
   final Dio dio;
-  
+
   ApiServices({required this.dio});
   Future<Response> get({required String endPoint}) async {
     var response = await dio.get("${ApiUrl.baseUrl}$endPoint",

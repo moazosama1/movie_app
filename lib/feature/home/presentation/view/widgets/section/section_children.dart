@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:movie_app/core/function/custom_function.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_view_more_movie.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
 
 class CustomSectionTwoItemsMovie extends StatelessWidget {
@@ -25,7 +25,6 @@ class CustomSectionTwoItemsMovie extends StatelessWidget {
               children: [
                 CustomViewMoreMovie(
                   title: title,
-                  movieList: state.childrenListMovies,
                 ),
                 SizedBox(
                   height: 8,
@@ -36,7 +35,10 @@ class CustomSectionTwoItemsMovie extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) =>
                           CustomMovieCardImageNetwork(
-                            movieItem: state.familyMovies?[index],
+                            previewItemModel:
+                                CustomFunction.getPreviewItemMovieModel(
+                              movieItem: state.familyMovies?[index],
+                            ),
                           ),
                       separatorBuilder: (context, index) => SizedBox(
                             width: 8,
@@ -52,7 +54,10 @@ class CustomSectionTwoItemsMovie extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) =>
                           CustomMovieCardImageNetwork(
-                            movieItem: state.childrenListMovies?[index],
+                            previewItemModel:
+                                CustomFunction.getPreviewItemMovieModel(
+                              movieItem: state.childrenListMovies?[index],
+                            ),
                           ),
                       separatorBuilder: (context, index) => SizedBox(
                             width: 8,

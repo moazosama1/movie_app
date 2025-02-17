@@ -1,4 +1,3 @@
-
 class TvShowItemModel {
   String? backdropPath;
   String? firstAirDate;

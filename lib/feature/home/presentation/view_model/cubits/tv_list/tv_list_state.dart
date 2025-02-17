@@ -8,8 +8,13 @@ final class TvListInitial extends TvListState {}
 final class TvListSuccess extends TvListState {
   final List<TvShowItemModel>? topRatedTv;
   final List<TvShowItemModel>? tvList;
-
-  TvListSuccess({this.topRatedTv, this.tvList});
+  final List<TvShowItemModel>? tvTrendingList;
+  final List<TvShowItemModel>? tvAiringTodayList;
+  TvListSuccess(
+      {this.tvAiringTodayList,
+      this.topRatedTv,
+      this.tvList,
+      this.tvTrendingList});
 }
 
 final class TvListLoading extends TvListState {}

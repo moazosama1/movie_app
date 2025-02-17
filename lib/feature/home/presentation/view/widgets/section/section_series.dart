@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/function/custom_function.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card_large.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_view_more_movie.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
 
 class CustomSectionSeriesMovie extends StatelessWidget {
@@ -24,7 +25,6 @@ class CustomSectionSeriesMovie extends StatelessWidget {
               children: [
                 CustomViewMoreMovie(
                   title: "Series",
-                  movieList: [],
                 ),
                 SizedBox(
                   height: 8,
@@ -37,8 +37,10 @@ class CustomSectionSeriesMovie extends StatelessWidget {
                             textTitleWidth: 120,
                             itemHeight: mediaQueryHeight * 0.17,
                             itemWidth: mediaQueryWidth * 0.5,
-                            isMovie: false,
-                            tvItem: state.seriesTvShowList?[index],
+                            previewItemModel:
+                                CustomFunction.getPreviewItemTvShowModel(
+                              tvItem: state.seriesTvShowList?[index],
+                            ),
                           ),
                       separatorBuilder: (context, index) => SizedBox(
                             width: 8,

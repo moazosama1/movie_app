@@ -12,13 +12,19 @@ class TvListCubit extends Cubit<TvListState> {
   Future<void> getTvAllData() async {
     emit(TvListLoading());
     final topRatedTvShowFuture = tvRepo.getListTvShowTopRatedItems();
+    final tvTrendingFuture = tvRepo.getListTvShowTrendingItems();
+    final tvAiringTodayFuture = tvRepo.getListTvShowAiringTodayItems();
     final tvShowListFuture = tvRepo.getListTvShowItems(categoryId: "10759");
     final result = await Future.wait([
       topRatedTvShowFuture,
       tvShowListFuture,
+      tvTrendingFuture,
+      tvAiringTodayFuture
     ]);
     List<TvShowItemModel>? topRatedTvList = [];
     List<TvShowItemModel>? tvList = [];
+    List<TvShowItemModel>? tvTrendingList = [];
+    List<TvShowItemModel>? tvAiringTodayList = [];
     result[0].fold(
       (l) => emit(TvListFailure(errorMessage: l.errorMessage)),
       (r) => topRatedTvList = (r ?? []).cast<TvShowItemModel>(),
@@ -28,6 +34,18 @@ class TvListCubit extends Cubit<TvListState> {
       (l) => emit(TvListFailure(errorMessage: l.errorMessage)),
       (r) => tvList = (r ?? []).cast<TvShowItemModel>(),
     );
-    emit(TvListSuccess(topRatedTv: topRatedTvList, tvList: tvList));
+    result[2].fold(
+      (l) => emit(TvListFailure(errorMessage: l.errorMessage)),
+      (r) => tvTrendingList = (r ?? []).cast<TvShowItemModel>(),
+    );
+    result[3].fold(
+      (l) => emit(TvListFailure(errorMessage: l.errorMessage)),
+      (r) => tvAiringTodayList = (r ?? []).cast<TvShowItemModel>(),
+    );
+    emit(TvListSuccess(
+        topRatedTv: topRatedTvList,
+        tvList: tvList,
+        tvTrendingList: tvTrendingList,
+        tvAiringTodayList: tvAiringTodayList));
   }
 }

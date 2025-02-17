@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/function/custom_function.dart';
 import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card_large.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_view_more_movie.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
 
 class CustomSectionComediesMovie extends StatelessWidget {
@@ -26,7 +27,6 @@ class CustomSectionComediesMovie extends StatelessWidget {
               children: [
                 CustomViewMoreMovie(
                   title: "Comedies",
-                  movieList: state.childrenListMovies,
                 ),
                 SizedBox(
                   height: 8,
@@ -39,7 +39,11 @@ class CustomSectionComediesMovie extends StatelessWidget {
                             textTitleWidth: 120,
                             itemHeight: mediaQueryHeight * 0.17,
                             itemWidth: mediaQueryWidth * 0.5,
-                            movieItem: state.comediesTopRatedListMovies?[index],
+                            previewItemModel:
+                                CustomFunction.getPreviewItemMovieModel(
+                              movieItem:
+                                  state.comediesTopRatedListMovies?[index],
+                            ),
                           ),
                       separatorBuilder: (context, index) => SizedBox(
                             width: 8,
@@ -55,7 +59,10 @@ class CustomSectionComediesMovie extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) =>
                           CustomMovieCardImageNetwork(
-                            movieItem: state.comediesListMovies?[index],
+                            previewItemModel:
+                                CustomFunction.getPreviewItemMovieModel(
+                              movieItem: state.comediesListMovies?[index],
+                            ),
                           ),
                       separatorBuilder: (context, index) => SizedBox(
                             width: 8,

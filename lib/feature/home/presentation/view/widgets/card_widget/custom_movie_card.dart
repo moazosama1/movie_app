@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/api/api_url.dart';
 import 'package:movie_app/core/function/custom_function.dart';
 import 'package:movie_app/core/widgets/custom_rating_movie.dart';
-import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
+import 'package:movie_app/feature/home/data/model/preview_item_model/preview_item_model.dart';
 import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_card_image_widget.dart';
 
@@ -13,9 +13,10 @@ class CustomMovieCard extends StatelessWidget {
     required this.title,
     required this.rating,
     required this.imagePath,
+    this.isMovie = true,
     this.onTap,
   });
-
+  final bool isMovie;
   final String title;
   final String? date;
   final double rating;
@@ -77,10 +78,9 @@ class CustomMovieCard extends StatelessWidget {
 class CustomMovieCardImageNetwork extends StatelessWidget {
   const CustomMovieCardImageNetwork({
     super.key,
-    required this.movieItem,
+    this.previewItemModel,
   });
-
-  final MovieItem? movieItem;
+  final PreviewItemModel? previewItemModel;
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class CustomMovieCardImageNetwork extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context)
-            .pushNamed(MovieDetailsView.routeName, arguments: movieItem);
+            .pushNamed(MovieDetailsView.routeName, arguments: previewItemModel);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,8 +99,8 @@ class CustomMovieCardImageNetwork extends StatelessWidget {
               SizedBox(
                 height: 190,
                 child: CustomImageCardWidget(
-                  imagePath:
-                      ApiUrl.getImageFullPath(imagePath: movieItem?.posterPath),
+                  imagePath: ApiUrl.getImageFullPath(
+                      imagePath: previewItemModel?.posterPath),
                   aspectRatio: 2.1 / 3,
                 ),
               ),
@@ -114,9 +114,8 @@ class CustomMovieCardImageNetwork extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(8),
                           topRight: Radius.circular(8))),
-                  child: CustomRatingMovie(
-                    rating: movieItem?.voteAverage,
-                  ),
+                  child:
+                      CustomRatingMovie(rating: previewItemModel?.voteAverage),
                 ),
               )
             ],
@@ -124,7 +123,7 @@ class CustomMovieCardImageNetwork extends StatelessWidget {
           SizedBox(
             width: 130,
             child: Text(
-              movieItem?.originalTitle ?? "",
+              previewItemModel?.title ?? "",
               style: theme.textTheme.labelMedium!
                   .copyWith(color: theme.colorScheme.surface),
               overflow: TextOverflow.ellipsis,
@@ -132,7 +131,9 @@ class CustomMovieCardImageNetwork extends StatelessWidget {
             ),
           ),
           Text(
-            CustomFunction.gitReleaseDate(releaseDate: movieItem?.releaseDate)!,
+            CustomFunction.gitReleaseDate(
+                releaseDate: previewItemModel?.releaseDate ??
+                    previewItemModel?.firstAirDate)!,
             style: theme.textTheme.labelSmall!
                 .copyWith(color: theme.colorScheme.tertiary),
           ),

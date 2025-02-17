@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_category_screen_item.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_tab_bar.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_tab_bar.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/browse/browse_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view_model/provider/main_provider.dart';
 import 'package:provider/provider.dart';

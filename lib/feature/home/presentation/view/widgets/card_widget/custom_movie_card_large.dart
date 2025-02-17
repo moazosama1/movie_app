@@ -3,8 +3,7 @@ import 'package:movie_app/core/api/api_url.dart';
 import 'package:movie_app/core/function/custom_function.dart';
 import 'package:movie_app/core/utils/image_path.dart';
 import 'package:movie_app/core/widgets/custom_rating_movie.dart';
-import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
-import 'package:movie_app/feature/home/data/model/tv_show_list_model/tv_show_item.dart';
+import 'package:movie_app/feature/home/data/model/preview_item_model/preview_item_model.dart';
 import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
 
 class CustomMovieCardLarge extends StatelessWidget {
@@ -12,14 +11,10 @@ class CustomMovieCardLarge extends StatelessWidget {
     super.key,
     required this.itemWidth,
     required this.itemHeight,
-    this.movieItem,
+    this.previewItemModel,
     required this.textTitleWidth,
-    this.isMovie = true,
-    this.tvItem,
   });
-  final bool isMovie;
-  final MovieItem? movieItem;
-  final TvShowItemModel? tvItem;
+  final PreviewItemModel? previewItemModel;
   final double itemWidth;
   final double itemHeight;
   final double textTitleWidth;
@@ -31,10 +26,8 @@ class CustomMovieCardLarge extends StatelessWidget {
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
-        if (isMovie) {
-          Navigator.of(context)
-              .pushNamed(MovieDetailsView.routeName, arguments: movieItem);
-        }
+        Navigator.of(context)
+            .pushNamed(MovieDetailsView.routeName, arguments: previewItemModel);
       },
       child: Container(
         width: itemWidth,
@@ -43,13 +36,11 @@ class CustomMovieCardLarge extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: (isMovie
-                    ? movieItem?.backdropPath != null
-                    : tvItem?.backdropPath != null)
+            image: (previewItemModel?.backdropPath != null ||
+                    previewItemModel?.posterPath != null)
                 ? NetworkImage(ApiUrl.getImageFullPath(
-                    imagePath: isMovie
-                        ? movieItem?.backdropPath
-                        : tvItem?.backdropPath)!)
+                    imagePath: previewItemModel?.backdropPath ??
+                        previewItemModel?.posterPath)!)
                 : AssetImage(ImagePath.errorImage),
           ),
         ),
@@ -83,9 +74,7 @@ class CustomMovieCardLarge extends StatelessWidget {
                         SizedBox(
                           width: textTitleWidth,
                           child: Text(
-                            isMovie
-                                ? movieItem?.originalTitle ?? ""
-                                : tvItem?.originalName ?? "",
+                            previewItemModel?.title ?? "",
                             style: theme.textTheme.labelSmall!
                                 .copyWith(color: theme.colorScheme.surface),
                             overflow: TextOverflow.ellipsis,
@@ -94,9 +83,8 @@ class CustomMovieCardLarge extends StatelessWidget {
                         ),
                         Text(
                             CustomFunction.gitReleaseDate(
-                                releaseDate: isMovie
-                                    ? movieItem?.releaseDate
-                                    : tvItem?.firstAirDate)!,
+                                releaseDate: previewItemModel?.releaseDate ??
+                                    previewItemModel?.firstAirDate)!,
                             style: theme.textTheme.labelSmall!.copyWith(
                                 fontSize: 12,
                                 color: theme.colorScheme.tertiary)),
@@ -105,9 +93,7 @@ class CustomMovieCardLarge extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: CustomRatingMovie(
-                        rating: isMovie
-                            ? movieItem?.voteAverage
-                            : tvItem?.voteAverage,
+                        rating: previewItemModel?.voteAverage,
                         sizeIcon: 14,
                         sizeFont: 14,
                       ),

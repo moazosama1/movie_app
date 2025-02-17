@@ -14,6 +14,10 @@ class ApiUrl {
       "genre/movie/list?language=en";
   static const String genresTvShowTopRatedEndPointUrl =
       "tv/top_rated?language=en-US&page=1";
+  static const String tvShowTrendingEndPointUrl =
+      "trending/tv/day?language=en-US";
+  static const String tvShowAiringTodayEndPointUrl =
+      "tv/airing_today?language=en-US&page=1";
 
   static String? getImageFullPath({required String? imagePath}) {
     if (imagePath != null) {

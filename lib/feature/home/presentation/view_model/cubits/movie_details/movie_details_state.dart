@@ -1,4 +1,8 @@
-part of 'movie_details_cubit.dart';
+
+
+import 'package:meta/meta.dart';
+import 'package:movie_app/feature/home/data/model/movie_details_model/movie_details_model.dart';
+import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
 
 @immutable
 sealed class MovieDetailsState {}

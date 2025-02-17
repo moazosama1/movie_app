@@ -13,7 +13,7 @@ class CustomBannerMovieDetailsImage extends StatelessWidget {
     var theme = Theme.of(context);
     return Container(
       width: double.infinity,
-      height: mediaQueryHeight * .3,
+      height: mediaQueryHeight * .35,
       decoration: BoxDecoration(
           image: DecorationImage(
               image: imagePath != null

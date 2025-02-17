@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/function/custom_function.dart';
 import 'package:movie_app/core/widgets/custom_rating_movie.dart';
-import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
+import 'package:movie_app/feature/home/data/model/preview_item_model/preview_item_model.dart';
 import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_card_image_widget.dart';
 
 class CustomMovieCardHorizontal extends StatelessWidget {
   const CustomMovieCardHorizontal({
     super.key,
-    required this.movieItem,
+    required this.previewItemModel,
   });
-  final MovieItem? movieItem;
+  final PreviewItemModel? previewItemModel;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
         Navigator.of(context)
-            .pushNamed(MovieDetailsView.routeName, arguments: movieItem);
+            .pushNamed(MovieDetailsView.routeName, arguments: previewItemModel);
       },
       child: SizedBox(
         height: 175,
         child: Row(
           children: [
             CustomImageCardWidget(
-              imagePath: movieItem?.posterPath ?? "",
+              imagePath: previewItemModel?.posterPath ?? "",
               aspectRatio: 2.1 / 3,
             ),
             SizedBox(
@@ -36,7 +37,7 @@ class CustomMovieCardHorizontal extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    movieItem?.originalTitle ?? "",
+                    previewItemModel?.title ?? "",
                     style: theme.textTheme.titleSmall,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
@@ -45,14 +46,13 @@ class CustomMovieCardHorizontal extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomRatingMovie(
-                        rating: movieItem?.voteAverage,
+                        rating: previewItemModel?.voteAverage,
                         mainAxisAlignment: MainAxisAlignment.start,
                       ),
                       Text(
-                        (movieItem?.releaseDate != null &&
-                                movieItem!.releaseDate!.length >= 4)
-                            ? movieItem!.releaseDate!.substring(0, 4)
-                            : "",
+                        CustomFunction.gitReleaseDate(
+                            releaseDate: previewItemModel?.releaseDate ??
+                                previewItemModel?.firstAirDate)!,
                         style: theme.textTheme.labelSmall!
                             .copyWith(color: theme.colorScheme.tertiary),
                       )

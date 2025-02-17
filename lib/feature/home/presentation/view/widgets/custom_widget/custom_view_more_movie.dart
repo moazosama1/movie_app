@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
+import 'package:movie_app/feature/home/data/model/preview_item_model/preview_item_model.dart';
 import 'package:movie_app/feature/home/presentation/view/more_movie_view.dart';
 
 // ignore: must_be_immutable
 class CustomViewMoreMovie extends StatelessWidget {
-  CustomViewMoreMovie(
-      {super.key,
-      required this.title,
-      this.isMovie = true,
-      required this.movieList});
+  const CustomViewMoreMovie({super.key, required this.title, this.itemList});
 
   final String title;
-  bool isMovie;
-  List<MovieItem>? movieList;
+  final List<PreviewItemModel>? itemList;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -26,11 +21,9 @@ class CustomViewMoreMovie extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            if (movieList!.isNotEmpty) {
-              if (isMovie) {
-                Navigator.pushNamed(context, MoreMovieView.routeName,
-                    arguments: movieList);
-              }
+            if (itemList!.isNotEmpty) {
+              Navigator.pushNamed(context, MoreMovieView.routeName,
+                  arguments: itemList);
             }
           },
           child: Text(

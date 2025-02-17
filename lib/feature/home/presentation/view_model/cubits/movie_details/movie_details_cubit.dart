@@ -1,41 +1,15 @@
-import 'dart:developer';
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/error/error.dart';
-import 'package:movie_app/feature/home/data/model/movie_details_model/movie_details_model/movie_details_model.dart';
+import 'package:movie_app/feature/home/data/model/movie_details_model/movie_details_model.dart';
 import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
 import 'package:movie_app/feature/home/data/repos/movie/movie_repo.dart';
 import 'package:movie_app/feature/home/data/repos/movie/movie_repo_impel.dart';
-
-part 'movie_details_state.dart';
+import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_details/movie_details_state.dart';
 
 class MovieDetailsCubit extends Cubit<MovieDetailsState> {
   MovieDetailsCubit() : super(MovieDetailsInitial());
   final MovieRepo homeRepo = MovieRepoImpel();
-  // getMovieDetailsByMovieId({required int movieId}) async {
-  //   emit(MovieDetailsLoading());
-  //   var data = await homeRepo.getMoviesDetailsById(movieId: movieId);
-  //   data.fold(
-  //     (left) => emit(MovieDetailsFailure(errorMessage: left.errorMessage)),
-  //     (right) {
-  //       // movieDetailsModel = right;
-  //       emit(MovieDetailsSuccess(movieDetailsModel: right));
-  //     },
-  //   );
-  // }
-
-  // getSimilarMovieByMovieId({required int movieId}) async {
-  //   emit(MovieDetailsLoading());
-  //   var data = await homeRepo.getSimilarMoviesItems(movieId: movieId);
-  //   data.fold(
-  //       (left) => emit(MovieDetailsFailure(errorMessage: left.errorMessage)),
-  //       (right) {
-  //     // similarList = right;
-  //     // emit(MovieDetailsSuccess(similarList: right));
-  //   });
-  // }
-
   Future<void> gitMovieDetailsAllInfo({required int movieId}) async {
     emit(MovieDetailsLoading());
 
@@ -74,11 +48,5 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
         movieSimilar: similarList!,
       ));
     }
-  }
-
-  @override
-  void onChange(Change<MovieDetailsState> change) {
-    log(change.toString());
-    super.onChange(change);
   }
 }

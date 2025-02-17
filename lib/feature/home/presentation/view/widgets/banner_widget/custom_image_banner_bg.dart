@@ -2,17 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/api/api_url.dart';
 import 'package:movie_app/core/utils/image_path.dart';
-import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
-import 'package:movie_app/feature/home/data/model/tv_show_list_model/tv_show_item.dart';
+import 'package:movie_app/feature/home/data/model/preview_item_model/preview_item_model.dart';
 import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_button_details_movie.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_button_details_movie.dart';
 
 class CustomBannerImageNetworkBg extends StatelessWidget {
-  const CustomBannerImageNetworkBg(
-      {super.key, this.movieItem, this.isMovie = true, this.tvItem});
-  final bool isMovie;
-  final TvShowItemModel? tvItem;
-  final MovieItem? movieItem;
+  const CustomBannerImageNetworkBg({
+    super.key,
+    required this.previewItem,
+  });
+  final PreviewItemModel? previewItem;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -23,12 +22,11 @@ class CustomBannerImageNetworkBg extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
           image: DecorationImage(
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
         opacity: 0.5,
-        image: (movieItem?.posterPath != null || tvItem?.posterPath != null)
-            ? CachedNetworkImageProvider(ApiUrl.getImageFullPath(
-                imagePath:
-                    isMovie ? movieItem?.posterPath : tvItem?.posterPath)!)
+        image: previewItem?.posterPath != null
+            ? CachedNetworkImageProvider(
+                ApiUrl.getImageFullPath(imagePath: previewItem?.posterPath)!)
             : AssetImage(ImagePath.errorImage),
       )),
       child: Column(
@@ -53,8 +51,8 @@ class CustomBannerImageNetworkBg extends StatelessWidget {
               iconTitle: Icons.details_rounded,
               title: "Details",
               onTapDetails: () {
-                // Navigator.of(context).pushNamed(MovieDetailsView.routeName,
-                //     arguments: movieItem);
+                Navigator.of(context).pushNamed(MovieDetailsView.routeName,
+                    arguments: previewItem);
               },
             ),
           ),

@@ -6,7 +6,7 @@ import 'package:movie_app/core/error/error.dart';
 import 'package:movie_app/core/utils/constant.dart';
 import 'package:movie_app/feature/home/data/model/genres_list_model/genre.dart';
 import 'package:movie_app/feature/home/data/model/genres_list_model/genres_list_model.dart';
-import 'package:movie_app/feature/home/data/model/movie_details_model/movie_details_model/movie_details_model.dart';
+import 'package:movie_app/feature/home/data/model/movie_details_model/movie_details_model.dart';
 import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
 import 'package:movie_app/feature/home/data/model/movies_list_model/movies_list_model.dart';
 import 'package:movie_app/feature/home/data/repos/movie/movie_repo.dart';
