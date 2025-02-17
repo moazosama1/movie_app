@@ -29,7 +29,7 @@ class HomeBody extends StatelessWidget {
                 tabs: tab,
                 tabAlignment: TabAlignment.fill,
               ),
-              screenTab[provider.initialIndexHomeTap],
+              homeScreenTab[provider.initialIndexHomeTap],
             ].reversed.toList(),
           ),
         )),

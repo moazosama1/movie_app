@@ -4,6 +4,7 @@ import 'package:movie_app/feature/home/presentation/view/home_view.dart';
 import 'package:movie_app/feature/home/presentation/view/more_movie_view.dart';
 import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/browse/browse_cubit.dart';
+import 'package:movie_app/feature/home/presentation/view_model/cubits/for_you_list/for_you_list_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/tv_list/tv_list_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view_model/provider/main_provider.dart';
@@ -20,10 +21,13 @@ abstract class AppRoutes {
           child: MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => MovieListCubit()..getAllMoviesData(),
+                create: (context) => ForYouListCubit()..getAllDataForYou(),
               ),
               BlocProvider(
                 create: (context) => TvListCubit()..getTvAllData(),
+              ),
+              BlocProvider(
+                create: (context) => MovieListCubit()..getAllMoviesData(),
               ),
               BlocProvider(
                 lazy: false,

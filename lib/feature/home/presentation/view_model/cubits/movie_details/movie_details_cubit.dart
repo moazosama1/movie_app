@@ -15,16 +15,22 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
 
     final movieDetailsFuture = homeRepo.getMoviesDetailsById(movieId: movieId);
     final similarMovieFuture = homeRepo.getSimilarMoviesItems(movieId: movieId);
+    final recommendationsMovieFuture =
+        homeRepo.getRecommendationsMoviesItems(movieId: movieId);
 
-    final results = await Future.wait([movieDetailsFuture, similarMovieFuture]);
+    final results = await Future.wait(
+        [movieDetailsFuture, similarMovieFuture, recommendationsMovieFuture]);
 
     final movieDetailsEither =
         results[0] as Either<Failure, MovieDetailsModel?>;
     final similarMoviesEither = results[1] as Either<Failure, List<MovieItem>?>;
+    final recommendationsMoviesEither =
+        results[2] as Either<Failure, List<MovieItem>?>;
 
     // Extracting data correctly using fold
     MovieDetailsModel? itemMovieDetails;
     List<MovieItem>? similarList;
+    List<MovieItem>? recommendationsList;
 
     movieDetailsEither.fold(
       (l) {
@@ -41,12 +47,21 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
       },
       (r) => similarList = r,
     );
+    recommendationsMoviesEither.fold(
+      (l) {
+        emit(MovieDetailsFailure(errorMessage: l.errorMessage));
+        return;
+      },
+      (r) => recommendationsList = r,
+    );
 
-    if (itemMovieDetails != null && similarList != null) {
+    if (itemMovieDetails != null &&
+        similarList != null &&
+        recommendationsList != null) {
       emit(MovieDetailsSuccess(
-        movieDetailsModel: itemMovieDetails!,
-        movieSimilar: similarList!,
-      ));
+          movieDetailsModel: itemMovieDetails,
+          movieSimilar: similarList,
+          movieRecommendations: recommendationsList));
     }
   }
 }

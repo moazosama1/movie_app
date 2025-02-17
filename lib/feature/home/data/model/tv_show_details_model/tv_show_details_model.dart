@@ -1,5 +1,6 @@
+import 'package:movie_app/feature/home/data/model/genres_list_model/genre.dart';
+
 import 'created_by.dart';
-import 'genre.dart';
 import 'last_episode_to_air.dart';
 import 'network.dart';
 import 'production_company.dart';

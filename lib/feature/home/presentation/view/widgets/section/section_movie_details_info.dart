@@ -7,8 +7,8 @@ import 'package:movie_app/feature/home/data/model/preview_item_model/preview_ite
 
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_card_image_widget.dart';
 
-class CustomMovieDetailsInfo extends StatelessWidget {
-  const CustomMovieDetailsInfo({
+class SectionMovieDetailsInfo extends StatelessWidget {
+  const SectionMovieDetailsInfo({
     super.key,
     required this.previewItemModel,
   });

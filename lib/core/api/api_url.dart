@@ -7,8 +7,12 @@ class ApiUrl {
       "discover/movie?sort_by=popularity.desc&&vote_average.gte=8&with_genres=";
   static const String upcomingEndPointUrl =
       "movie/upcoming?language=en-US&page=1";
-  static const String tpRatedEndPointUrl =
+  static const String tpRatedMovieEndPointUrl =
       "movie/top_rated?language=en-US&page=1";
+  static const String popularMovieEndPointUrl =
+      "movie/popular?language=en-US&page=1";
+  static const String nowPlayingEndPointUrl =
+      "movie/now_playing?language=en-US&page=1";
 
   static const String genresMovieListEndPointUrl =
       "genre/movie/list?language=en";

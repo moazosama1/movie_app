@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 import 'package:movie_app/core/error/error.dart';
-import 'package:movie_app/feature/home/data/model/movie_details_model/movie_details_model.dart';
 import 'package:movie_app/feature/home/data/model/tv_show_details_model/tv_show_details_model.dart';
 import 'package:movie_app/feature/home/data/model/tv_show_list_model/tv_show_item.dart';
 import 'package:movie_app/feature/home/data/repos/tv/tv_repo.dart';
@@ -24,25 +23,30 @@ class TvShowDetailsCubit extends Cubit<TvShowDetailsState> {
     );
   }
 
-
   Future<void> gitTvShowDetailsAllInfo({required int tvId}) async {
     emit(TvShowDetailsLoading());
 
     final tvShowDetailsFuture = tvRepo.getTvShowDetailsItems(id: tvId);
     final similarTvShowFuture = tvRepo.getSimilarListTvShowItems(id: tvId);
+    final recommendationsTvShowFuture =
+        tvRepo.getRecommendationsListTvShowItems(id: tvId);
 
-    final results =
-        await Future.wait([tvShowDetailsFuture, similarTvShowFuture]);
+    final results = await Future.wait([
+      tvShowDetailsFuture,
+      similarTvShowFuture,
+      recommendationsTvShowFuture
+    ]);
 
-    final movieDetailsEither =
-        results[0] as Either<Failure, TvShowDetailsModel?>;
-    final similarMoviesEither =
-        results[1] as Either<Failure, List<TvShowItemModel>?>;
+    final tvDetailsEither = results[0] as Either<Failure, TvShowDetailsModel?>;
+    final similarEither = results[1] as Either<Failure, List<TvShowItemModel>?>;
+    final recommendationsEither =
+        results[2] as Either<Failure, List<TvShowItemModel>?>;
 
     TvShowDetailsModel? itemTvShowDetails;
     List<TvShowItemModel>? similarList;
+    List<TvShowItemModel>? recommendationsList;
 
-    movieDetailsEither.fold(
+    tvDetailsEither.fold(
       (l) {
         emit(TvShowDetailsFailure(errorMessage: l.errorMessage));
         return;
@@ -50,17 +54,26 @@ class TvShowDetailsCubit extends Cubit<TvShowDetailsState> {
       (r) => itemTvShowDetails = r,
     );
 
-    similarMoviesEither.fold(
+    similarEither.fold(
       (l) {
         emit(TvShowDetailsFailure(errorMessage: l.errorMessage));
         return;
       },
       (r) => similarList = r,
     );
+    recommendationsEither.fold(
+      (l) {
+        emit(TvShowDetailsFailure(errorMessage: l.errorMessage));
+        return;
+      },
+      (r) => recommendationsList = r,
+    );
 
     if (itemTvShowDetails != null && similarList != null) {
       emit(TvShowDetailsSuccess(
-          similarTvList: similarList, tvShowDetailsModel: itemTvShowDetails));
+          similarTvList: similarList,
+          tvShowDetailsModel: itemTvShowDetails,
+          recommendationsTvList: recommendationsList));
     }
   }
 }

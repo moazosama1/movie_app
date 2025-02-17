@@ -94,12 +94,12 @@ class MovieRepoImpel extends MovieRepo {
 
 //get genres list movie list || tv list
   @override
-  Future<Either<Failure, List<GenreItem>?>> getGenresList() async {
+  Future<Either<Failure, List<Genre>?>> getGenresList() async {
     try {
       var request =
           await apiServices.get(endPoint: ApiUrl.genresMovieListEndPointUrl);
       var response = GenresListModel.fromJson(request.data);
-      List<GenreItem> listGenres = response.genres?.toList() ?? [];
+      List<Genre> listGenres = response.genres?.toList() ?? [];
       return right(listGenres);
     } catch (e) {
       if (e is DioException) {
@@ -131,7 +131,8 @@ class MovieRepoImpel extends MovieRepo {
   @override
   Future<Either<Failure, List<MovieItem>?>> getListMoviesTopRated() async {
     try {
-      var request = await apiServices.get(endPoint: ApiUrl.tpRatedEndPointUrl);
+      var request =
+          await apiServices.get(endPoint: ApiUrl.tpRatedMovieEndPointUrl);
       var response = MoviesListModel.fromJson(request.data);
       List<MovieItem> listMovies = response.results?.toList() ?? [];
       return right(listMovies);
@@ -169,6 +170,58 @@ class MovieRepoImpel extends MovieRepo {
     try {
       var request = await apiServices.get(
           endPoint: "${ApiUrl.trendingByGenresUrl}$categoryId");
+      var response = MoviesListModel.fromJson(request.data);
+      List<MovieItem> listMovies = response.results?.toList() ?? [];
+      return right(listMovies);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDio(dioError: e));
+      } else {
+        return left(ServerFailure(errorMessage: commonError));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MovieItem>?>> getListMoviesNowPlaying() async {
+    try {
+      var request =
+          await apiServices.get(endPoint: ApiUrl.nowPlayingEndPointUrl);
+      var response = MoviesListModel.fromJson(request.data);
+      List<MovieItem>? listMovies = response.results?.toList() ?? [];
+      return right(listMovies);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDio(dioError: e));
+      } else {
+        return left(ServerFailure(errorMessage: commonError));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MovieItem>?>> getListMoviesPopular() async {
+    try {
+      var request =
+          await apiServices.get(endPoint: ApiUrl.popularMovieEndPointUrl);
+      var response = MoviesListModel.fromJson(request.data);
+      List<MovieItem>? listMovies = response.results?.toList() ?? [];
+      return right(listMovies);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDio(dioError: e));
+      } else {
+        return left(ServerFailure(errorMessage: commonError));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MovieItem>?>> getRecommendationsMoviesItems(
+      {required int movieId}) async {
+    try {
+      var request = await apiServices.get(
+          endPoint: "movie/$movieId/recommendations?language=en-US&page=1");
       var response = MoviesListModel.fromJson(request.data);
       List<MovieItem> listMovies = response.results?.toList() ?? [];
       return right(listMovies);

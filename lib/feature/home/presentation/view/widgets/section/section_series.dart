@@ -1,75 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/function/custom_function.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card_large.dart';
+import 'package:movie_app/feature/home/data/model/tv_show_list_model/tv_show_item.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
-import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_small_items.dart';
 
 class CustomSectionSeriesMovie extends StatelessWidget {
-  const CustomSectionSeriesMovie({super.key});
-
+  const CustomSectionSeriesMovie({super.key, this.seriesTvShowList});
+  final List<TvShowItemModel>? seriesTvShowList;
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     var theme = Theme.of(context);
 
-    return BlocBuilder<MovieListCubit, MovieListState>(
-      builder: (context, state) {
-        switch (state) {
-          case MovieListInitial():
-            // TODO: Handle this case.
-            throw UnimplementedError();
-          case MovieListSuccess():
-            return Column(
-              children: [
-                CustomViewMoreMovie(
-                  title: "Series",
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                SizedBox(
-                  height: mediaQueryHeight * 0.15,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => CustomMovieCardLarge(
-                            textTitleWidth: 120,
-                            itemHeight: mediaQueryHeight * 0.17,
-                            itemWidth: mediaQueryWidth * 0.5,
-                            previewItemModel:
-                                CustomFunction.getPreviewItemTvShowModel(
-                              tvItem: state.seriesTvShowList?[index],
-                            ),
-                          ),
-                      separatorBuilder: (context, index) => SizedBox(
-                            width: 8,
-                          ),
-                      itemCount: state.seriesTvShowList?.length ?? 0),
-                ),
-              ],
-            );
-          case MovieListLoading():
-            return SizedBox(
-              height: mediaQueryHeight * .45,
-              width: double.infinity,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          case MovieListFailure():
-            return SizedBox(
-              height: mediaQueryHeight * .45,
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  state.errorMessage,
-                  style: theme.textTheme.labelLarge,
-                ),
-              ),
-            );
-        }
-      },
+    return Column(
+      children: [
+        CustomViewMoreMovie(
+          title: "Series",
+          itemList: CustomFunction.getPreviewItemListTvShowModel(
+              tvItem: seriesTvShowList),
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        CustomListSmallList(
+            previewItems: CustomFunction.getPreviewItemListTvShowModel(
+                tvItem: seriesTvShowList)),
+      ],
     );
   }
 }

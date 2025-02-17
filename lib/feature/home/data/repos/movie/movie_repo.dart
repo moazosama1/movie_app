@@ -10,6 +10,8 @@ abstract class MovieRepo {
 
   Future<Either<Failure, List<MovieItem>?>> getListMoviesUpcoming();
   Future<Either<Failure, List<MovieItem>?>> getListMoviesTopRated();
+  Future<Either<Failure, List<MovieItem>?>> getListMoviesNowPlaying();
+  Future<Either<Failure, List<MovieItem>?>> getListMoviesPopular();
   Future<Either<Failure, List<MovieItem>?>> getListMoviesTopRatedByGenreId(
       {required String categoryId});
   Future<Either<Failure, List<MovieItem>?>> getListMoviesTrendingByGenreId(
@@ -20,5 +22,7 @@ abstract class MovieRepo {
       {required int movieId});
   Future<Either<Failure, MovieDetailsModel>> getMoviesDetailsById(
       {required int movieId});
-  Future<Either<Failure, List<GenreItem>?>> getGenresList();
+  Future<Either<Failure, List<Genre>?>> getGenresList();
+  Future<Either<Failure, List<MovieItem>?>> getRecommendationsMoviesItems(
+      {required int movieId});
 }

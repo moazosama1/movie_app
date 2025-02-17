@@ -1,73 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/function/custom_function.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card.dart';
+import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
-import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_large_items.dart';
 
 class CustomSectionFantasyMovie extends StatelessWidget {
-  const CustomSectionFantasyMovie({super.key});
+  const CustomSectionFantasyMovie({super.key, this.fantasyListMovies});
+  final List<MovieItem>? fantasyListMovies;
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    return BlocBuilder<MovieListCubit, MovieListState>(
-      builder: (context, state) {
-        switch (state) {
-          case MovieListInitial():
-            // TODO: Handle this case.
-            throw UnimplementedError();
-          case MovieListSuccess():
-            return Column(
-              children: [
-                CustomViewMoreMovie(
-                  title: "Sci-fi & Fantasy",
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                SizedBox(
-                  height: 250,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) =>
-                          CustomMovieCardImageNetwork(
-                            previewItemModel:
-                                CustomFunction.getPreviewItemMovieModel(
-                              movieItem: state.fantasyListMovies?[index],
-                            ),
-                          ),
-                      separatorBuilder: (context, index) => SizedBox(
-                            width: 8,
-                          ),
-                      itemCount: state.fantasyListMovies?.length ?? 0),
-                ),
-              ],
-            );
-          case MovieListLoading():
-            return SizedBox(
-              height: 200,
-              width: double.infinity,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          case MovieListFailure():
-            return SizedBox(
-              height: 300,
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  state.errorMessage,
-                  style: theme.textTheme.labelLarge,
-                ),
-              ),
-            );
-        }
-      },
+    return Column(
+      children: [
+        CustomViewMoreMovie(
+          title: "Sci-fi & Fantasy",
+          itemList: CustomFunction.getPreviewItemMovieListModel(
+              movieItem: fantasyListMovies),
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        CustomListLargeItems(
+          listPreviewItems: CustomFunction.getPreviewItemMovieListModel(
+              movieItem: fantasyListMovies),
+        ),
+      ],
     );
   }
 }

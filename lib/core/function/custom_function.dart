@@ -18,7 +18,6 @@ class CustomFunction {
     } else {
       return "";
     }
-    return null;
   }
 
 //////////////////////////////////////////////////
@@ -32,6 +31,20 @@ class CustomFunction {
       voteAverage: movieItem?.voteAverage,
       posterPath: movieItem?.posterPath,
     );
+    return previewItemModel;
+  }
+
+
+  static getPreviewItemMovieListModel({required List<MovieItem>? movieItem}) {
+    List<PreviewItemModel> previewItemModel = movieItem?.map((item) => PreviewItemModel(
+      id: item.id,
+      backdropPath: item.backdropPath,
+      overview: item.overview,
+      title: item.title,
+      releaseDate: item.releaseDate,
+      voteAverage: item.voteAverage,
+      posterPath: item.posterPath,
+    )).toList() ?? [];
     return previewItemModel;
   }
 
@@ -83,6 +96,18 @@ class CustomFunction {
       voteAverage: tvItem?.voteAverage,
       posterPath: tvItem?.posterPath,
     );
+    return previewItemModel;
+  }
+  static getPreviewItemListTvShowModel({required List<TvShowItemModel>? tvItem}) {
+    List<PreviewItemModel>? previewItemModel =tvItem?.map((item) => PreviewItemModel(
+      id: item.id,
+      backdropPath: item.backdropPath,
+      overview: item.overview,
+      title: item.name,
+      firstAirDate: item.firstAirDate,
+      voteAverage: item.voteAverage,
+      posterPath: item.posterPath,
+    )).toList() ?? [];
     return previewItemModel;
   }
 }

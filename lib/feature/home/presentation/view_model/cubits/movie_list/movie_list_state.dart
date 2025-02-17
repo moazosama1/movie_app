@@ -6,28 +6,14 @@ sealed class MovieListState {}
 final class MovieListInitial extends MovieListState {}
 
 final class MovieListSuccess extends MovieListState {
-  final List<MovieItem>? actionListMovies;
-  final List<MovieItem>? topRatedActionListMovies;
-  final List<MovieItem>? comediesListMovies;
-  final List<MovieItem>? comediesTopRatedListMovies;
-  final List<MovieItem>? topRatedMovies;
-  final List<MovieItem>? familyMovies;
-  final List<MovieItem>? childrenListMovies;
-  final List<TvShowItemModel>? seriesTvShowList;
-  final List<MovieItem>? fantasyListMovies;
-  final List<MovieItem>? upcomingListMovies;
+  final List<MovieItem>? comingSoonList;
+  final List<MovieItem>? topRatedList;
+  final List<MovieItem>? topRatedActionList;
+  final List<MovieItem>? nowPlayingList;
+  final List<MovieItem>? popularList;
 
-  MovieListSuccess(
-      {this.actionListMovies,
-      this.comediesTopRatedListMovies,
-      this.topRatedActionListMovies,
-      this.comediesListMovies,
-      this.topRatedMovies,
-      this.familyMovies,
-      this.childrenListMovies,
-      this.seriesTvShowList,
-      this.fantasyListMovies,
-      this.upcomingListMovies});
+  MovieListSuccess({this.comingSoonList, this.topRatedList,
+      this.topRatedActionList, this.nowPlayingList, this.popularList});
 }
 
 final class MovieListLoading extends MovieListState {}

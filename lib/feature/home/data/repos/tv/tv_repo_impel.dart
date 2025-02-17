@@ -104,8 +104,26 @@ class TvRepoImpel extends TvRepo {
   Future<Either<Failure, List<TvShowItemModel>?>> getSimilarListTvShowItems(
       {required int id}) async {
     try {
-      var request =
-          await apiServices.get(endPoint: "tv/$id/similar?language=en-US&page=1");
+      var request = await apiServices.get(
+          endPoint: "tv/$id/similar?language=en-US&page=1");
+      var response = TvShowListModel.fromJson(request.data);
+      List<TvShowItemModel> listTvShow = response.results?.toList() ?? [];
+      return right(listTvShow);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDio(dioError: e));
+      } else {
+        return left(ServerFailure(errorMessage: commonError));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TvShowItemModel>?>>
+      getRecommendationsListTvShowItems({required int id}) async {
+    try {
+      var request = await apiServices.get(
+          endPoint: "tv/$id/recommendations?language=en-US&page=1");
       var response = TvShowListModel.fromJson(request.data);
       List<TvShowItemModel> listTvShow = response.results?.toList() ?? [];
       return right(listTvShow);

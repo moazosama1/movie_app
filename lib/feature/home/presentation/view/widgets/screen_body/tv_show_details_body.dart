@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/function/custom_function.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/banner_widget/custom_banner_movie_details.dart';
+import 'package:movie_app/feature/home/data/model/preview_item_model/preview_item_model.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/banner_widget/custom_banner_item_details.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card_horizontal.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_season_card.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_movie_details_info.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/section/section_movie_details_info.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_button_details_movie.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_like_more_items.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_recommendations_items.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/tv_details/tv_show_details_cubit.dart';
 
 class TvShowDetailsBody extends StatelessWidget {
@@ -34,8 +37,9 @@ class TvShowDetailsBody extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: Stack(
                     children: [
-                      CustomBannerMovieDetailsImage(
-                        imagePath: state.tvShowDetailsModel?.backdropPath,
+                      CustomBannerItemDetailsImage(
+                        imagePath: state.tvShowDetailsModel?.backdropPath ??
+                            state.tvShowDetailsModel?.posterPath,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -44,7 +48,7 @@ class TvShowDetailsBody extends StatelessWidget {
                             SizedBox(
                               height: mediaQueryHeight * 0.16,
                             ),
-                            CustomMovieDetailsInfo(
+                            SectionMovieDetailsInfo(
                               previewItemModel: CustomFunction
                                   .getPreviewItemTvShowDetailsModel(
                                       tvShowItem: state.tvShowDetailsModel),
@@ -93,6 +97,9 @@ class TvShowDetailsBody extends StatelessWidget {
                             ),
                             CustomViewMoreMovie(
                               title: "More Like This",
+                              itemList:
+                                  CustomFunction.getPreviewItemListTvShowModel(
+                                      tvItem: state.similarTvList),
                             ),
                             SizedBox(
                               height: 16,
@@ -103,27 +110,13 @@ class TvShowDetailsBody extends StatelessWidget {
                     ],
                   ),
                 ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: 8,
-                        left: 16,
-                        right: 16,
-                      ),
-                      child: CustomMovieCardHorizontal(
-                        previewItemModel:
-                            CustomFunction.getPreviewItemTvShowModel(
-                                tvItem: state.similarTvList?[index]),
-                      ),
-                    ),
-                    childCount: state.similarTvList?.length ?? 0,
-                  ),
+                CustomListLikeMoreItems(
+                  previewItemList: CustomFunction.getPreviewItemListTvShowModel(
+                      tvItem: state.similarTvList),
                 ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 8,
-                  ),
+                CustomListRecommendationsItems(
+                  previewItemList: CustomFunction.getPreviewItemListTvShowModel(
+                      tvItem: state.recommendationsTvList),
                 ),
               ],
             );

@@ -10,9 +10,11 @@ final class TvShowDetailsLoading extends TvShowDetailsState {}
 final class TvShowDetailsSuccess extends TvShowDetailsState {
   final TvShowDetailsModel? tvShowDetailsModel;
   final List<TvShowItemModel>? similarTvList;
+  final List<TvShowItemModel>? recommendationsTvList;
   TvShowDetailsSuccess({
     this.tvShowDetailsModel,
     this.similarTvList,
+    this.recommendationsTvList,
   });
 }
 

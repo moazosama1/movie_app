@@ -12,12 +12,12 @@ class MoreMovieView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var previewList =
-        ModalRoute.of(context)!.settings.arguments as List<PreviewItemModel>?;
+        ModalRoute.of(context)!.settings.arguments as List<PreviewItemModel>;
     var theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Like this",
+          "All Items",
           style: theme.textTheme.titleMedium,
         ),
       ),

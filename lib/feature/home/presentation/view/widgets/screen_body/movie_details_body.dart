@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/error/custom_error_widget.dart';
 import 'package:movie_app/core/function/custom_function.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/banner_widget/custom_banner_movie_details.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card_horizontal.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/banner_widget/custom_banner_item_details.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_button_details_movie.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/custom_movie_details_info.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/section/section_movie_details_info.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_like_more_items.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_recommendations_items.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_details/movie_details_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_details/movie_details_state.dart';
 
@@ -16,6 +18,7 @@ class MovieDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
+    var mediaQueryWidth = MediaQuery.of(context).size.width;
     var theme = Theme.of(context);
     return BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
       builder: (context, state) {
@@ -29,7 +32,7 @@ class MovieDetailsBody extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: Stack(
                     children: [
-                      CustomBannerMovieDetailsImage(
+                      CustomBannerItemDetailsImage(
                         imagePath: state.movieDetailsModel?.backdropPath,
                       ),
                       Padding(
@@ -39,7 +42,7 @@ class MovieDetailsBody extends StatelessWidget {
                             SizedBox(
                               height: mediaQueryHeight * 0.16,
                             ),
-                            CustomMovieDetailsInfo(
+                            SectionMovieDetailsInfo(
                               previewItemModel: CustomFunction
                                   .getPreviewItemMovieDetailsModel(
                                       movieItemDetails:
@@ -58,6 +61,9 @@ class MovieDetailsBody extends StatelessWidget {
                             ),
                             CustomViewMoreMovie(
                               title: "More Like This",
+                              itemList:
+                                  CustomFunction.getPreviewItemMovieListModel(
+                                      movieItem: state.movieSimilar),
                             ),
                             SizedBox(
                               height: 16,
@@ -68,26 +74,13 @@ class MovieDetailsBody extends StatelessWidget {
                     ],
                   ),
                 ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: 8,
-                        left: 16,
-                        right: 16,
-                      ),
-                      child: CustomMovieCardHorizontal(
-                          previewItemModel:
-                              CustomFunction.getPreviewItemMovieModel(
-                                  movieItem: state.movieSimilar?[index])),
-                    ),
-                    childCount: state.movieSimilar?.length ?? 0,
-                  ),
+                CustomListLikeMoreItems(
+                  previewItemList: CustomFunction.getPreviewItemMovieListModel(
+                      movieItem: state.movieSimilar),
                 ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 8,
-                  ),
+                CustomListRecommendationsItems(
+                  previewItemList: CustomFunction.getPreviewItemMovieListModel(
+                      movieItem: state.movieRecommendations),
                 ),
               ],
             );
@@ -95,13 +88,9 @@ class MovieDetailsBody extends StatelessWidget {
             return SizedBox(
                 height: 230, child: Center(child: CircularProgressIndicator()));
           case MovieDetailsFailure():
-            return Center(
-                child: SizedBox(
-              child: Text(
-                state.errorMessage,
-                style: theme.textTheme.titleMedium,
-              ),
-            ));
+            return CustomErrorWidget(
+              errorMessage: state.errorMessage,
+            );
         }
       },
     );

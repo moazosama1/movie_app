@@ -1,10 +1,10 @@
-class GenreItem {
+class Genre {
   int? id;
   String? name;
 
-  GenreItem({this.id, this.name});
+  Genre({this.id, this.name});
 
-  factory GenreItem.fromJson(Map<String, dynamic> json) => GenreItem(
+  factory Genre.fromJson(Map<String, dynamic> json) => Genre(
         id: json['id'] as int?,
         name: json['name'] as String?,
       );

@@ -10,7 +10,7 @@ part 'browse_state.dart';
 class BrowseCubit extends Cubit<BrowseState> {
   BrowseCubit() : super(BrowseInitial());
   MovieRepo homeRepo = MovieRepoImpel();
-  List<GenreItem>? genresMovie = [];
+  List<Genre>? genresMovie = [];
   List<MovieItem>? listMovie = [];
   getGenresList() async {
     emit(BrowseLoading());
@@ -60,13 +60,13 @@ class BrowseCubit extends Cubit<BrowseState> {
       listMoviesFuture,
       trendingListMoviesFuture
     ]);
-    List<GenreItem>? genresList = [];
+    List<Genre>? genresList = [];
     List<MovieItem>? lastReleaseList = [];
     List<MovieItem>? listMovies = [];
     List<MovieItem>? trendingMoviesList = [];
     results[0].fold(
       (l) => emit(BrowseFailure(errorMessage: l.errorMessage)),
-      (r) => genresMovie = (r ?? []).cast<GenreItem>(),
+      (r) => genresMovie = (r ?? []).cast<Genre>(),
     );
     results[1].fold(
       (l) => emit(BrowseFailure(errorMessage: l.errorMessage)),

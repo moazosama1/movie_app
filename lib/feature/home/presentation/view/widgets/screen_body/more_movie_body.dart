@@ -9,7 +9,6 @@ class MoreMovieBody extends StatelessWidget {
     super.key,
     this.previewItemModel,
   });
-
   final List<PreviewItemModel>? previewItemModel;
   @override
   Widget build(BuildContext context) {
@@ -28,8 +27,8 @@ class MoreMovieBody extends StatelessWidget {
                 child: BlocProvider(
                   create: (context) => MovieDetailsCubit(),
                   child: CustomMovieCardImageNetwork(
-                      previewItemModel: PreviewItemModel(),
-                      ),
+                    previewItemModel: previewItemModel?[index],
+                  ),
                 ),
               ),
             ),

@@ -14,20 +14,17 @@ class CustomMovieCard extends StatelessWidget {
     required this.rating,
     required this.imagePath,
     this.isMovie = true,
-    this.onTap,
   });
   final bool isMovie;
   final String title;
   final String? date;
   final double rating;
   final String imagePath;
-  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
     return GestureDetector(
-      onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

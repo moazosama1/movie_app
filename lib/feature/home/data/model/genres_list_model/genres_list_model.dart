@@ -1,14 +1,14 @@
 import 'genre.dart';
 
 class GenresListModel {
-  List<GenreItem>? genres;
+  List<Genre>? genres;
 
   GenresListModel({this.genres});
 
   factory GenresListModel.fromJson(Map<String, dynamic> json) {
     return GenresListModel(
       genres: (json['genres'] as List<dynamic>?)
-          ?.map((e) => GenreItem.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Genre.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
   }

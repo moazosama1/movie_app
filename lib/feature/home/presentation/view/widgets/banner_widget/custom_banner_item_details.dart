@@ -3,8 +3,8 @@ import 'package:movie_app/core/api/api_url.dart';
 import 'package:movie_app/core/utils/image_path.dart';
 import 'package:movie_app/core/widgets/custom_shadow.dart';
 
-class CustomBannerMovieDetailsImage extends StatelessWidget {
-  const CustomBannerMovieDetailsImage({super.key, required this.imagePath});
+class CustomBannerItemDetailsImage extends StatelessWidget {
+  const CustomBannerItemDetailsImage({super.key, required this.imagePath});
   final String? imagePath;
   @override
   Widget build(BuildContext context) {

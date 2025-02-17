@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/function/custom_function.dart';
-import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card_large.dart';
+import 'package:movie_app/feature/home/data/model/movies_list_model/list_of_result.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
-import 'package:movie_app/feature/home/presentation/view_model/cubits/movie_list/movie_list_cubit.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_items.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_small_items.dart';
 
 class CustomSectionComediesMovie extends StatelessWidget {
-  const CustomSectionComediesMovie({super.key});
+  const CustomSectionComediesMovie(
+      {super.key, this.comediesTopRatedListMovies, this.comediesListMovies});
+  final List<MovieItem>? comediesTopRatedListMovies;
+  final List<MovieItem>? comediesListMovies;
 
   @override
   Widget build(BuildContext context) {
@@ -16,82 +17,28 @@ class CustomSectionComediesMovie extends StatelessWidget {
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     var theme = Theme.of(context);
 
-    return BlocBuilder<MovieListCubit, MovieListState>(
-      builder: (context, state) {
-        switch (state) {
-          case MovieListInitial():
-            // TODO: Handle this case.
-            throw UnimplementedError();
-          case MovieListSuccess():
-            return Column(
-              children: [
-                CustomViewMoreMovie(
-                  title: "Comedies",
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                SizedBox(
-                  height: mediaQueryHeight * 0.15,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => CustomMovieCardLarge(
-                            textTitleWidth: 120,
-                            itemHeight: mediaQueryHeight * 0.17,
-                            itemWidth: mediaQueryWidth * 0.5,
-                            previewItemModel:
-                                CustomFunction.getPreviewItemMovieModel(
-                              movieItem:
-                                  state.comediesTopRatedListMovies?[index],
-                            ),
-                          ),
-                      separatorBuilder: (context, index) => SizedBox(
-                            width: 8,
-                          ),
-                      itemCount: state.comediesTopRatedListMovies?.length ?? 0),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                SizedBox(
-                  height: 250,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) =>
-                          CustomMovieCardImageNetwork(
-                            previewItemModel:
-                                CustomFunction.getPreviewItemMovieModel(
-                              movieItem: state.comediesListMovies?[index],
-                            ),
-                          ),
-                      separatorBuilder: (context, index) => SizedBox(
-                            width: 8,
-                          ),
-                      itemCount: state.comediesListMovies?.length ?? 0),
-                ),
-              ],
-            );
-          case MovieListLoading():
-            return SizedBox(
-              height: mediaQueryHeight * .45,
-              width: double.infinity,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          case MovieListFailure():
-            return SizedBox(
-              height: mediaQueryHeight * .45,
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  state.errorMessage,
-                  style: theme.textTheme.labelLarge,
-                ),
-              ),
-            );
-        }
-      },
+    return Column(
+      children: [
+        CustomViewMoreMovie(
+          title: "Comedies",
+          itemList: CustomFunction.getPreviewItemMovieListModel(
+              movieItem: (comediesTopRatedListMovies ?? []) +
+                  (comediesListMovies ?? [])),
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        CustomListSmallList(
+            previewItems: CustomFunction.getPreviewItemMovieListModel(
+                movieItem: comediesTopRatedListMovies)),
+        SizedBox(
+          height: 8,
+        ),
+        CustomListItems(
+          previewItemList: CustomFunction.getPreviewItemMovieListModel(
+              movieItem: comediesListMovies),
+        )
+      ],
     );
   }
 }

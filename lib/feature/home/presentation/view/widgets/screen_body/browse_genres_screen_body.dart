@@ -6,87 +6,83 @@ import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/c
 import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_items.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_large_items.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_banner_widget.dart';
-import 'package:movie_app/feature/home/presentation/view_model/cubits/tv_list/tv_list_cubit.dart';
+import 'package:movie_app/feature/home/presentation/view_model/cubits/browse/browse_cubit.dart';
 
-class HomeTvBody extends StatelessWidget {
-  const HomeTvBody({super.key});
+class BrowseGenresScreenBody extends StatelessWidget {
+  const BrowseGenresScreenBody({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     var theme = Theme.of(context);
-    return BlocBuilder<TvListCubit, TvListState>(
+    return BlocBuilder<BrowseCubit, BrowseState>(
       builder: (context, state) {
         switch (state) {
-          case TvListInitial():
+          case BrowseInitial():
             // TODO: Handle this case.
             throw UnimplementedError();
-          case TvListSuccess():
+          case BrowseSuccess():
             return Column(
               children: [
                 CustomBannerWidget(
-                  isMovie: false,
-                  tvListItems: state.tvTrendingList,
-                ),
-                SizedBox(
-                  height: 8,
+                  isMovie: true,
+                  movieListItems: state.trendingMoviesList,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Column(
                     children: [
                       CustomViewMoreMovie(
                         title: "Trending",
-                        itemList: CustomFunction.getPreviewItemListTvShowModel(
-                            tvItem: state.tvAiringTodayList),
+                        itemList: CustomFunction.getPreviewItemMovieListModel(
+                            movieItem: state.trendingMoviesList),
                       ),
                       SizedBox(
                         height: 8,
                       ),
                       CustomListItems(
                         previewItemList:
-                            CustomFunction.getPreviewItemListTvShowModel(
-                                tvItem: state.tvTrendingList),
+                            CustomFunction.getPreviewItemMovieListModel(
+                                movieItem: state.trendingMoviesList),
                       ),
-                      CustomViewMoreMovie(
-                        title: "Popular",
-                        itemList: CustomFunction.getPreviewItemListTvShowModel(
-                            tvItem: state.tvList),
+                      CustomListItems(
+                        previewItemList:
+                            CustomFunction.getPreviewItemMovieListModel(
+                                movieItem: state.listMovies),
                       ),
                       SizedBox(
                         height: 8,
                       ),
-                      CustomListItems(
-                        previewItemList:
-                            CustomFunction.getPreviewItemListTvShowModel(
-                                tvItem: state.tvList),
-                      ),
                       CustomViewMoreMovie(
-                        title: "Airing Today",
-                        itemList: CustomFunction.getPreviewItemListTvShowModel(
-                            tvItem: state.tvAiringTodayList),
+                        title: "Latest Releases",
+                        itemList: CustomFunction.getPreviewItemMovieListModel(
+                            movieItem: state.lastReleaseList),
                       ),
                       SizedBox(
                         height: 8,
                       ),
                       CustomListLargeItems(
-                        listPreviewItems:
-                            CustomFunction.getPreviewItemListTvShowModel(
-                                tvItem: state.tvAiringTodayList),
-                      )
+                          listPreviewItems:
+                              CustomFunction.getPreviewItemMovieListModel(
+                                  movieItem: state.lastReleaseList)),
                     ],
                   ),
-                )
+                ),
               ],
             );
-          case TvListLoading():
+          case BrowseLoading():
             return SizedBox(
-              height: mediaQueryHeight * .4,
-              child: Center(child: CircularProgressIndicator()),
+              height: 200,
+              width: double.infinity,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
-
-          case TvListFailure():
+          case BrowseFailure():
             return CustomErrorWidget(
               errorMessage: state.errorMessage,
             );
