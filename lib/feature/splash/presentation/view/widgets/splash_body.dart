@@ -8,19 +8,21 @@ class SplashBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomSplashBg(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Opacity(
-            opacity: 0.8,
-            child: Image.asset(
-              ImagePath.logoApp2Image,
-              fit: BoxFit.scaleDown,
+    return SafeArea(
+      child: CustomSplashBg(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Opacity(
+              opacity: 0.8,
+              child: Image.asset(
+                ImagePath.logoApp2Image,
+                fit: BoxFit.scaleDown,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

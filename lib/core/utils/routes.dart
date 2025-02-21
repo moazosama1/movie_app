@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/feature/auth/presentation/view/auth_view.dart';
+import 'package:movie_app/feature/auth/presentation/view_model/cubit/auth_cubit_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view/home_view.dart';
 import 'package:movie_app/feature/home/presentation/view/more_movie_view.dart';
 import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
@@ -39,5 +41,9 @@ abstract class AppRoutes {
         ),
     MovieDetailsView.routeName: (_) => MovieDetailsView(),
     MoreMovieView.routeName: (_) => MoreMovieView(),
+    AuthView.routeName: (_) => BlocProvider(
+          create: (context) => AuthCubit(),
+          child: AuthView(),
+        ),
   };
 }

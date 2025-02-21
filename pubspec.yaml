@@ -37,7 +37,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
+  flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.0.17
+  flutter_web_auth: 
   google_fonts: ^6.2.1
   meta: ^1.15.0
   provider: ^6.1.2

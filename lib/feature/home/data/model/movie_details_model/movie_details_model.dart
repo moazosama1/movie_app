@@ -1,4 +1,3 @@
-
 import 'package:movie_app/feature/home/data/model/genres_list_model/genre.dart';
 
 import 'production_company.dart';

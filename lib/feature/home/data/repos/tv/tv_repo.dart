@@ -9,8 +9,8 @@ abstract class TvRepo {
       {required String categoryId});
   Future<Either<Failure, List<TvShowItemModel>?>> getSimilarListTvShowItems(
       {required int id});
-  Future<Either<Failure, List<TvShowItemModel>?>> getRecommendationsListTvShowItems(
-      {required int id});
+  Future<Either<Failure, List<TvShowItemModel>?>>
+      getRecommendationsListTvShowItems({required int id});
   Future<Either<Failure, TvShowDetailsModel>> getTvShowDetailsItems(
       {required int id});
   Future<Either<Failure, List<TvShowItemModel>?>> getListTvShowTopRatedItems();

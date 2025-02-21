@@ -25,55 +25,55 @@ class HomeForYouBody extends StatelessWidget {
             // TODO: Handle this case.
             throw UnimplementedError();
           case ForYouListSuccess():
-          return Column(
-            children: [
-              CustomBannerWidget(
-                movieListItems: state.topRatedMovies,
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  children: [
-                    CustomSectionComingSoonMovie(
-                      movieListItems: state.upcomingListMovies,
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    CustomSectionActionMovie(
-                      actionListMovies: state.actionListMovies,
-                      topRatedMovies: state.topRatedMovies,
-                    ),
-                    CustomSectionComediesMovie(
-                      comediesListMovies: state.comediesListMovies,
-                      comediesTopRatedListMovies:
-                          state.comediesTopRatedListMovies,
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    CustomSectionTwoItemsMovie(
-                      title: "Children & Family",
-                      childrenListMovies: state.childrenListMovies,
-                      familyMovies: state.familyMovies,
-                    ),
-                    CustomSectionSeriesMovie(
-                      seriesTvShowList: state.seriesTvShowList,
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    CustomSectionFantasyMovie(
-                      fantasyListMovies: state.fantasyListMovies,
-                    ),
-                  ],
+            return Column(
+              children: [
+                CustomBannerWidget(
+                  movieListItems: state.topRatedMovies,
                 ),
-              )
-            ],
-          );
+                SizedBox(
+                  height: 8,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    children: [
+                      CustomSectionComingSoonMovie(
+                        movieListItems: state.upcomingListMovies,
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      CustomSectionActionMovie(
+                        actionListMovies: state.actionListMovies,
+                        topRatedMovies: state.topRatedMovies,
+                      ),
+                      CustomSectionComediesMovie(
+                        comediesListMovies: state.comediesListMovies,
+                        comediesTopRatedListMovies:
+                            state.comediesTopRatedListMovies,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      CustomSectionTwoItemsMovie(
+                        title: "Children & Family",
+                        childrenListMovies: state.childrenListMovies,
+                        familyMovies: state.familyMovies,
+                      ),
+                      CustomSectionSeriesMovie(
+                        seriesTvShowList: state.seriesTvShowList,
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      CustomSectionFantasyMovie(
+                        fantasyListMovies: state.fantasyListMovies,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            );
           case ForYouListLoading():
             return SizedBox(
               height: mediaQueryHeight * .4,

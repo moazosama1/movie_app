@@ -13,4 +13,16 @@ class ApiServices {
         }));
     return response;
   }
+
+  Future<Response> post(
+      {required String endPoint, required String requestToken}) async {
+    var response = await dio.post("${ApiUrl.baseUrl}$endPoint",
+        options: Options(
+          headers: {
+            "Authorization": "Bearer ${ApiKey.token}",
+          },
+        ),
+        data: {"request_token": requestToken});
+    return response;
+  }
 }

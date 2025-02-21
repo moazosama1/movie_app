@@ -18,7 +18,6 @@ class CustomBannerImageNetworkBg extends StatelessWidget {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     return Container(
-      height: mediaQueryHeight * .45,
       width: double.infinity,
       decoration: BoxDecoration(
           image: DecorationImage(

@@ -22,6 +22,12 @@ class ApiUrl {
       "trending/tv/day?language=en-US";
   static const String tvShowAiringTodayEndPointUrl =
       "tv/airing_today?language=en-US&page=1";
+  static const String requestTokenEndPointUrl = "authentication/token/new";
+  static const String sessionIdEndPointUrl = "authentication/session/new";
+  static const String userPermissionPointUrl =
+      "https://www.themoviedb.org/authenticate/";
+  static const String getAccountEndPointUrl =
+      "account?session_id=";
 
   static String? getImageFullPath({required String? imagePath}) {
     if (imagePath != null) {

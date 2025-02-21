@@ -4,6 +4,8 @@ import 'package:movie_app/core/widgets/button_nav_bar_item.dart';
 import 'package:movie_app/core/utils/constant.dart';
 import 'package:movie_app/core/utils/image_path.dart';
 import 'package:movie_app/core/widgets/list_screen.dart';
+import 'package:movie_app/feature/auth/data/repos/auth_repo.dart';
+import 'package:movie_app/feature/auth/data/repos/auth_repo_impl.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/browse/browse_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view_model/provider/main_provider.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +28,10 @@ class HomeView extends StatelessWidget {
               onTap: (value) async {
                 await cubit.getAllData();
                 provider.customControlHomePage(value);
+                // AuthRepo authRepo = AuthRepoImpel();
+                // await authRepo.logoutAccount();
+                // print(await authRepo.getAccountId());
+                // print(await authRepo.getSessionId());
               },
               currentIndex: provider.currentIndex,
               items: [

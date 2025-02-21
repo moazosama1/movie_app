@@ -1,5 +1,6 @@
 class ImagePath {
   static const String splashScreenImage = "assets/image/splash.png";
+  static const String bgAuthImage = "assets/image/bgAuth.png";
   static const String logoApp2Image = "assets/logo/logo.png";
   static const String searchIcon = "assets/icon/search-2.svg";
   static const String homeIcon = "assets/icon/home_icon.svg";

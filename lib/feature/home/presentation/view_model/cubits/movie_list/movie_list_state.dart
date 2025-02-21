@@ -12,8 +12,12 @@ final class MovieListSuccess extends MovieListState {
   final List<MovieItem>? nowPlayingList;
   final List<MovieItem>? popularList;
 
-  MovieListSuccess({this.comingSoonList, this.topRatedList,
-      this.topRatedActionList, this.nowPlayingList, this.popularList});
+  MovieListSuccess(
+      {this.comingSoonList,
+      this.topRatedList,
+      this.topRatedActionList,
+      this.nowPlayingList,
+      this.popularList});
 }
 
 final class MovieListLoading extends MovieListState {}
