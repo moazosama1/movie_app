@@ -27,7 +27,7 @@ class CustomViewMoreMovie extends StatelessWidget {
             }
           },
           child: Text(
-            "View All",
+            itemList != null && itemList!.isNotEmpty ? "View All" : "",
             style: theme.textTheme.labelSmall!
                 .copyWith(color: theme.colorScheme.primary),
           ),

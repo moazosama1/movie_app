@@ -6,74 +6,8 @@ import 'package:movie_app/feature/home/data/model/preview_item_model/preview_ite
 import 'package:movie_app/feature/home/presentation/view/movie_details_view.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_card_image_widget.dart';
 
-class CustomMovieCard extends StatelessWidget {
-  const CustomMovieCard({
-    super.key,
-    required this.date,
-    required this.title,
-    required this.rating,
-    required this.imagePath,
-    this.isMovie = true,
-  });
-  final bool isMovie;
-  final String title;
-  final String? date;
-  final double rating;
-  final String imagePath;
-  @override
-  Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-
-    return GestureDetector(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              SizedBox(
-                height: 190,
-                child: CustomCardComingSoon(
-                  imagePath: imagePath,
-                  aspectRatio: 2.1 / 3,
-                ),
-              ),
-              Positioned(
-                right: 0,
-                child: Container(
-                  width: 60,
-                  height: 28,
-                  decoration: BoxDecoration(
-                      color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(8),
-                          topRight: Radius.circular(8))),
-                  child: CustomRatingMovie(
-                    rating: rating,
-                  ),
-                ),
-              )
-            ],
-          ),
-          Text(
-            title,
-            style: theme.textTheme.labelMedium!
-                .copyWith(color: theme.colorScheme.surface),
-            overflow: TextOverflow.clip,
-            maxLines: 2,
-          ),
-          Text(
-            date ?? "",
-            style: theme.textTheme.labelSmall!
-                .copyWith(color: theme.colorScheme.tertiary),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CustomMovieCardImageNetwork extends StatelessWidget {
-  const CustomMovieCardImageNetwork({
+class CustomMovieBasicCard extends StatelessWidget {
+  const CustomMovieBasicCard({
     super.key,
     this.previewItemModel,
   });
@@ -120,7 +54,7 @@ class CustomMovieCardImageNetwork extends StatelessWidget {
           SizedBox(
             width: 130,
             child: Text(
-              previewItemModel?.title ?? "",
+              (previewItemModel?.title ?? previewItemModel?.originalName) ?? "",
               style: theme.textTheme.labelMedium!
                   .copyWith(color: theme.colorScheme.surface),
               overflow: TextOverflow.ellipsis,

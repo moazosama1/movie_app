@@ -14,15 +14,26 @@ class ApiServices {
     return response;
   }
 
-  Future<Response> post(
-      {required String endPoint, required String requestToken}) async {
+  Future<Response> post({required String endPoint, data}) async {
     var response = await dio.post("${ApiUrl.baseUrl}$endPoint",
         options: Options(
           headers: {
             "Authorization": "Bearer ${ApiKey.token}",
           },
         ),
-        data: {"request_token": requestToken});
+        data: data);
+    return response;
+  }
+
+  Future<Response> delete(
+      {required String endPoint, required String sessionId}) async {
+    var response = await dio.delete("${ApiUrl.baseUrl}$endPoint",
+        options: Options(
+          headers: {
+            "Authorization": "Bearer ${ApiKey.token}",
+          },
+        ),
+        data: {"session_id": sessionId});
     return response;
   }
 }

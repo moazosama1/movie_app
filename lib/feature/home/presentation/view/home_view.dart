@@ -7,6 +7,8 @@ import 'package:movie_app/core/widgets/list_screen.dart';
 import 'package:movie_app/feature/auth/data/repos/auth_repo.dart';
 import 'package:movie_app/feature/auth/data/repos/auth_repo_impl.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/browse/browse_cubit.dart';
+import 'package:movie_app/feature/home/presentation/view_model/cubits/saved_item/saved_cubit.dart';
+import 'package:movie_app/feature/home/presentation/view_model/cubits/account_info/account_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view_model/provider/main_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +20,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var cubit = BlocProvider.of<BrowseCubit>(context);
+    var cubitSaved = BlocProvider.of<SavedCubit>(context);
     return ChangeNotifierProvider(
       create: (context) => MainProvider(),
       child: Consumer<MainProvider>(
@@ -26,12 +29,9 @@ class HomeView extends StatelessWidget {
             body: screen[provider.currentIndex],
             bottomNavigationBar: BottomNavigationBar(
               onTap: (value) async {
-                await cubit.getAllData();
                 provider.customControlHomePage(value);
-                // AuthRepo authRepo = AuthRepoImpel();
-                // await authRepo.logoutAccount();
-                // print(await authRepo.getAccountId());
-                // print(await authRepo.getSessionId());
+                await cubitSaved.getWatchNewAllData();
+                await cubit.getAllData();
               },
               currentIndex: provider.currentIndex,
               items: [

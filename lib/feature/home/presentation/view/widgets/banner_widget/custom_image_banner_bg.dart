@@ -53,6 +53,7 @@ class CustomBannerImageNetworkBg extends StatelessWidget {
                 Navigator.of(context).pushNamed(MovieDetailsView.routeName,
                     arguments: previewItem);
               },
+              previewItemModel: previewItem,
             ),
           ),
         ],

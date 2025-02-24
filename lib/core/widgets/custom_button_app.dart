@@ -7,8 +7,9 @@ class CustomButtonApp extends StatelessWidget {
       required this.color,
       required this.title,
       required this.icon,
+      this.isLoading = false,
       this.onTap});
-
+  final bool isLoading;
   final Color color;
   final String title;
   final IconData icon;
@@ -31,10 +32,20 @@ class CustomButtonApp extends StatelessWidget {
               icon,
               color: theme.colorScheme.surface,
             ),
-            Text(
-              title,
-              style: TextStyle(fontSize: 15, color: theme.colorScheme.surface),
-            )
+            !isLoading
+                ? Text(
+                    title,
+                    style: TextStyle(
+                        fontSize: 15, color: theme.colorScheme.surface),
+                  )
+                : SizedBox(
+                    height: 18,
+                    width: 18,
+                    child: CircularProgressIndicator(
+                      color: theme.colorScheme.surface,
+                      strokeWidth: 3,
+                    ),
+                  )
           ],
         ),
       ),

@@ -23,7 +23,7 @@ class CustomBannerWidget extends StatelessWidget {
     var theme = Theme.of(context);
     return CarouselSlider(
       options: CarouselOptions(
-        height: mediaQueryHeight * .55,
+        height: mediaQueryHeight * .58,
         autoPlay: true,
         enlargeCenterPage: true,
         viewportFraction: 1.0,

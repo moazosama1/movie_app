@@ -18,7 +18,7 @@ class MovieDetailsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          previewItem.title ?? "",
+          previewItem.title ?? previewItem.originalName ?? "",
           style: theme.textTheme.titleMedium,
         ),
       ),

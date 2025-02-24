@@ -2,7 +2,7 @@ class ApiUrl {
   static const String baseUrl = "https://api.themoviedb.org/3/";
   static const String listMoviesByGenresIdUrl = "discover/movie?with_genres=";
   static const String listTvShowByGenresIdUrl = "discover/tv?with_genres=";
-  static const String imageUrl = "https://image.tmdb.org/t/p/original";
+  static const String imageUrl = "https://image.tmdb.org/t/p/w500";
   static const String trendingByGenresUrl =
       "discover/movie?sort_by=popularity.desc&&vote_average.gte=8&with_genres=";
   static const String upcomingEndPointUrl =
@@ -26,8 +26,8 @@ class ApiUrl {
   static const String sessionIdEndPointUrl = "authentication/session/new";
   static const String userPermissionPointUrl =
       "https://www.themoviedb.org/authenticate/";
-  static const String getAccountEndPointUrl =
-      "account?session_id=";
+  static const String getAccountEndPointUrl = "account?session_id=";
+  static const String getAccountInfoEndPointUrl = "account/";
 
   static String? getImageFullPath({required String? imagePath}) {
     if (imagePath != null) {

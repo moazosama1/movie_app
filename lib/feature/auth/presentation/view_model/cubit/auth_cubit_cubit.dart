@@ -61,10 +61,4 @@ class AuthCubit extends Cubit<AuthCubitState> {
     await secureStorage.write(key: "account_id", value: accountId.toString());
     emit(AuthCubitSuccess());
   }
-
-  @override
-  void onChange(Change<AuthCubitState> change) {
-    log(change.toString());
-    super.onChange(change);
-  }
 }

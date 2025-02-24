@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:movie_app/feature/home/data/model/tv_show_list_model/tv_show_item.dart';
 import 'package:movie_app/feature/home/data/repos/tv/tv_repo.dart';
-import 'package:movie_app/feature/home/data/repos/tv/tv_repo_impel.dart';
+import 'package:movie_app/feature/home/data/repos/tv/tv_repo_impl.dart';
 
 part 'tv_list_state.dart';
 

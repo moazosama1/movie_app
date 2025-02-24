@@ -14,7 +14,7 @@ class CustomListItems extends StatelessWidget {
       height: 250,
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => CustomMovieCardImageNetwork(
+          itemBuilder: (context, index) => CustomMovieBasicCard(
                 previewItemModel: previewItemList?[index],
               ),
           separatorBuilder: (context, index) => SizedBox(

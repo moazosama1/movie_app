@@ -33,7 +33,7 @@ class SectionMovieDetailsInfo extends StatelessWidget {
               Text(
                 previewItemModel?.title ?? "",
                 style: theme.textTheme.titleMedium,
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(

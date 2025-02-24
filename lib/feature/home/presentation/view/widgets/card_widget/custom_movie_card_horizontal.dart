@@ -20,7 +20,7 @@ class CustomMovieCardHorizontal extends StatelessWidget {
             .pushNamed(MovieDetailsView.routeName, arguments: previewItemModel);
       },
       child: SizedBox(
-        height: 175,
+        height: 145,
         child: Row(
           children: [
             CustomImageCardWidget(
@@ -39,7 +39,7 @@ class CustomMovieCardHorizontal extends StatelessWidget {
                   Text(
                     previewItemModel?.title ?? "",
                     style: theme.textTheme.titleSmall,
-                    maxLines: 3,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Row(

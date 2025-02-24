@@ -21,4 +21,6 @@ class ImagePath {
   static const String tMovieBgImage = "assets/image/tMovieBg.jpg";
   static const String tMoviePosterImage = "assets/image/tMoviePoster.jpg";
   static const String tMovieCardImage = "assets/image/tMovieCard2.png";
+  static const String previewAccountImage = "assets/image/preview_account.png";
+  static const String searchResultImage = "assets/image/searching_result.png";
 }

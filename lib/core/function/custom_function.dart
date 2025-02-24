@@ -33,6 +33,18 @@ class CustomFunction {
     );
     return previewItemModel;
   }
+  static getPreviewItemFromMovieDetailsModel({required MovieDetailsModel? movieItem}) {
+    PreviewItemModel previewItemModel = PreviewItemModel(
+      id: movieItem?.id,
+      backdropPath: movieItem?.backdropPath,
+      overview: movieItem?.overview,
+      title: movieItem?.title,
+      releaseDate: movieItem?.releaseDate,
+      voteAverage: movieItem?.voteAverage,
+      posterPath: movieItem?.posterPath,
+    );
+    return previewItemModel;
+  }
 
   static getPreviewItemMovieListModel({required List<MovieItem>? movieItem}) {
     List<PreviewItemModel> previewItemModel = movieItem
@@ -89,6 +101,18 @@ class CustomFunction {
   }
 
   static getPreviewItemTvShowModel({required TvShowItemModel? tvItem}) {
+    PreviewItemModel previewItemModel = PreviewItemModel(
+      id: tvItem?.id,
+      backdropPath: tvItem?.backdropPath,
+      overview: tvItem?.overview,
+      title: tvItem?.name,
+      firstAirDate: tvItem?.firstAirDate,
+      voteAverage: tvItem?.voteAverage,
+      posterPath: tvItem?.posterPath,
+    );
+    return previewItemModel;
+  }
+  static getPreviewItemTvShowFromTvDetailsModel({required TvShowDetailsModel? tvItem}) {
     PreviewItemModel previewItemModel = PreviewItemModel(
       id: tvItem?.id,
       backdropPath: tvItem?.backdropPath,

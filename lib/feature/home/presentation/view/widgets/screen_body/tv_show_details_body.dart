@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/function/custom_function.dart';
-import 'package:movie_app/feature/home/data/model/preview_item_model/preview_item_model.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/banner_widget/custom_banner_item_details.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card_horizontal.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_season_card.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_movie_details_info.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_button_details_movie.dart';
@@ -60,6 +58,9 @@ class TvShowDetailsBody extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               iconTitle: Icons.play_arrow_outlined,
                               title: "Play",
+                              previewItemModel: CustomFunction
+                                  .getPreviewItemTvShowFromTvDetailsModel(
+                                      tvItem: state.tvShowDetailsModel),
                             ),
                             SizedBox(
                               height: 16,

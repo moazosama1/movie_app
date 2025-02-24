@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomTextFiledSearch extends StatelessWidget {
-  const CustomTextFiledSearch({super.key});
-
+  CustomTextFiledSearch({super.key, this.onChange});
+  void Function(String)? onChange;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return TextField(
       style: theme.textTheme.labelSmall,
+      onChanged: onChange,
       decoration: InputDecoration(
         hintText: "Search",
         hintStyle: theme.textTheme.labelMedium,

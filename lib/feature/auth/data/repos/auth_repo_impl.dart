@@ -11,7 +11,6 @@ import 'package:movie_app/feature/auth/data/models/auth_model/request_token.dart
 import 'package:movie_app/feature/auth/data/models/auth_model/session_model.dart';
 import 'package:movie_app/core/utils/constant.dart';
 import 'package:movie_app/feature/auth/data/repos/auth_repo.dart';
-
 class AuthRepoImpel extends AuthRepo {
   ApiServices apiServices = ApiServices(dio: Dio());
   final storage = FlutterSecureStorage();
@@ -37,7 +36,8 @@ class AuthRepoImpel extends AuthRepo {
       {required String requestToken}) async {
     try {
       var request = await apiServices.post(
-          endPoint: ApiUrl.sessionIdEndPointUrl, requestToken: requestToken);
+          endPoint: ApiUrl.sessionIdEndPointUrl,
+          data: {"request_token": requestToken});
       var response = SessionModel.fromJson(request.data);
       SessionModel requestTokenModel = response;
       return right(requestTokenModel);
@@ -73,6 +73,7 @@ class AuthRepoImpel extends AuthRepo {
   Future<String?> getSessionId() async {
     return await storage.read(key: "session_id");
   }
+
   @override
   Future<String?> getAccountId() async {
     return await storage.read(key: "account_id");
@@ -101,4 +102,34 @@ class AuthRepoImpel extends AuthRepo {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, AccountModel>> getAccountInfoById(
+      {required int accountId}) async {
+    try {
+      var request = await apiServices.get(
+          endPoint: "${ApiUrl.getAccountInfoEndPointUrl}$accountId");
+      var response = AccountModel.fromJson(request.data);
+      AccountModel accountModel = response;
+      return right(accountModel);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDio(dioError: e));
+      } else {
+        return left(ServerFailure(errorMessage: commonError));
+      }
+    }
+  }
+
+  @override
+  Future<void> deleteSession({required String sessionId}) async {
+    try {
+      var request = await apiServices.delete(
+          endPoint: "authentication/session", sessionId: sessionId);
+    } on Exception catch (e) {
+      print(e.toString());
+    }
+  }
+
+
 }

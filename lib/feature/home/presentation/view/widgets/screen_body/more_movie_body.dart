@@ -26,7 +26,7 @@ class MoreMovieBody extends StatelessWidget {
               itemBuilder: (context, index) => Center(
                 child: BlocProvider(
                   create: (context) => MovieDetailsCubit(),
-                  child: CustomMovieCardImageNetwork(
+                  child: CustomMovieBasicCard(
                     previewItemModel: previewItemModel?[index],
                   ),
                 ),

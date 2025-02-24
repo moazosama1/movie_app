@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/error/custom_error_widget.dart';
+import 'package:movie_app/core/function/custom_favorite_function.dart';
 import 'package:movie_app/core/function/custom_function.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/banner_widget/custom_banner_item_details.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_button_details_movie.dart';
@@ -20,6 +21,7 @@ class MovieDetailsBody extends StatelessWidget {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var mediaQueryWidth = MediaQuery.of(context).size.width;
     var theme = Theme.of(context);
+
     return BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
       builder: (context, state) {
         switch (state) {
@@ -55,6 +57,10 @@ class MovieDetailsBody extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               iconTitle: Icons.play_arrow_outlined,
                               title: "Play",
+                              previewItemModel: CustomFunction
+                                  .getPreviewItemFromMovieDetailsModel(
+                                      movieItem:
+                                          state.movieDetailsModel),
                             ),
                             SizedBox(
                               height: 16,

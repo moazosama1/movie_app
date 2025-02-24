@@ -11,6 +11,17 @@ const List<Widget> tab = [
     text: "TV Show",
   ),
 ];
+const List<Widget> tabWatchList = [
+  Tab(
+    text: "Movie",
+  ),
+  Tab(
+    text: "Tv Show",
+  ),
+  Tab(
+    text: "Account",
+  ),
+];
 List<Widget> categoryTabs = List.generate(
   20,
   (index) => Tab(
