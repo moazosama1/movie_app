@@ -35,6 +35,11 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  customCancelLoading() {
+    isLoading = false;
+    notifyListeners();
+  }
+
   customIsAddItemLoading() {
     addItem = true;
     notifyListeners();

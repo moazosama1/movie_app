@@ -5,6 +5,7 @@ import 'package:movie_app/core/utils/theme_app.dart';
 import 'package:movie_app/feature/splash/presentation/view/splash_view.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MovieApp());
 }
 

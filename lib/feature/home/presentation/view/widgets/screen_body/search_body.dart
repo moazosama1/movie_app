@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/error/custom_error_widget.dart';
-import 'package:movie_app/core/function/custom_function.dart';
+import 'package:movie_app/core/shimmer/list/custom_list_item_search_shimmer.dart';
 import 'package:movie_app/core/utils/image_path.dart';
+import 'package:movie_app/core/widgets/custom_initial_screen.dart';
 import 'package:movie_app/core/widgets/custom_text_filed.dart';
-import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_movie_card.dart';
+import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_search_items.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/search/search_cubit.dart';
 
 class SearchBody extends StatelessWidget {
@@ -37,47 +38,20 @@ class SearchBody extends StatelessWidget {
             builder: (context, state) {
               switch (state) {
                 case SearchInitial():
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: mediaQueryHeight * 0.2,
-                      ),
-                      SizedBox(
-                        height: mediaQueryHeight * 0.3,
-                        child: Center(
-                          child: Image.asset(
-                            height: mediaQueryHeight * .25,
-                            fit: BoxFit.scaleDown,
-                            ImagePath.searchResultImage,
-                            color: theme.colorScheme.primary,
-                          ),
-                        ),
-                      ),
-                    ],
+                  return CustomInitialScreen(
+                    imagePath: ImagePath.searchResultImage,
                   );
                 case SearchSuccess():
-                  return Expanded(
-                    child: GridView.builder(
-                        physics: BouncingScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 2 / 3,
-                        ),
-                        scrollDirection: Axis.vertical,
-                        itemCount: state.multiSearch?.length ?? 0,
-                        itemBuilder: (context, index) => Center(
-                              child: CustomMovieBasicCard(
-                                previewItemModel: state.multiSearch?[index],
-                              ),
-                            )),
+                  if (cubit.multiSearch!.isEmpty) {
+                    return CustomInitialScreen(
+                      imagePath: ImagePath.searchResultImage,
+                    );
+                  }
+                  return CustomListSearchItems(
+                    multiSearch: state.multiSearch,
                   );
                 case SearchLoading():
-                  return Center(
-                    child: SizedBox(
-                      height: 230,
-                      child: Center(child: CircularProgressIndicator()),
-                    ),
-                  );
+                  return CustomListItemSearchShimmer();
                 case SearchFailure():
                   return CustomErrorWidget(
                     errorMessage: state.errorMessage,

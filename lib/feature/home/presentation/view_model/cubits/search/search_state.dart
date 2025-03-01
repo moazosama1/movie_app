@@ -6,10 +6,9 @@ sealed class SearchState {}
 final class SearchInitial extends SearchState {}
 
 final class SearchSuccess extends SearchState {
-  final List<MovieItem>? movieSearch;
   final List<PreviewItemModel>? multiSearch;
 
-  SearchSuccess({this.movieSearch, this.multiSearch});
+  SearchSuccess({ this.multiSearch});
 }
 
 final class SearchLoading extends SearchState {}

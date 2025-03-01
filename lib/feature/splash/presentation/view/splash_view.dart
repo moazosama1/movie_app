@@ -4,6 +4,7 @@ import 'package:movie_app/feature/auth/data/repos/auth_repo.dart';
 import 'package:movie_app/feature/auth/data/repos/auth_repo_impl.dart';
 import 'package:movie_app/feature/auth/presentation/view/auth_view.dart';
 import 'package:movie_app/feature/home/presentation/view/home_view.dart';
+import 'package:movie_app/feature/splash/presentation/view/onboarding_view.dart';
 import 'package:movie_app/feature/splash/presentation/view/widgets/splash_body.dart';
 
 class SplashView extends StatefulWidget {
@@ -23,6 +24,11 @@ class _SplashViewState extends State<SplashView> {
       Duration(seconds: 3),
       () async {
         final String? sessionId = await widget.authRepo.getSessionId();
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          OnboardingView.routeName,
+          (route) => false,
+        );
         if (sessionId != null) {
           Navigator.pushNamedAndRemoveUntil(
             context,
@@ -32,7 +38,7 @@ class _SplashViewState extends State<SplashView> {
         } else {
           Navigator.pushNamedAndRemoveUntil(
             context,
-            AuthView.routeName,
+            OnboardingView.routeName,
             (route) => false,
           );
         }

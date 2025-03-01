@@ -13,12 +13,16 @@ import 'package:movie_app/feature/home/presentation/view_model/cubits/search/sea
 import 'package:movie_app/feature/home/presentation/view_model/cubits/tv_list/tv_list_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/account_info/account_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view_model/provider/main_provider.dart';
+import 'package:movie_app/feature/splash/presentation/view/onboarding_view.dart';
 import 'package:movie_app/feature/splash/presentation/view/splash_view.dart';
+import 'package:movie_app/feature/splash/presentation/view_model/provider/onboarding_provider.dart';
 import 'package:provider/provider.dart';
 
 abstract class AppRoutes {
   static Map<String, WidgetBuilder> appRoute = {
     SplashView.routeName: (_) => SplashView(),
+    OnboardingView.routeName: (_) => ChangeNotifierProvider(
+        create: (_) => OnboardingProvider(), child: OnboardingView()),
     HomeView.routeName: (_) => MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => MainProvider()),
@@ -42,7 +46,7 @@ abstract class AppRoutes {
                 create: (context) => AccountCubit()..getAccountInfo(),
               ),
               BlocProvider(
-                create: (context) => SavedCubit()..getWatchAllData(),
+                create: (context) => SavedCubit(),
               ),
               BlocProvider(
                 create: (context) => SearchCubit(),
@@ -51,10 +55,13 @@ abstract class AppRoutes {
             child: HomeView(),
           ),
         ),
-    MovieDetailsView.routeName: (_) => BlocProvider.value(
-          value: AccountCubit(),
-          child: MovieDetailsView(),
-        ),
+    MovieDetailsView.routeName: (_) => MultiProvider(
+        providers: [
+        BlocProvider.value(value: AccountCubit()),
+        ChangeNotifierProvider(create: (_) => MainProvider()),
+        ],
+        child: MovieDetailsView(),
+      ),
     MoreMovieView.routeName: (_) => MoreMovieView(),
     AuthView.routeName: (_) => BlocProvider(
           create: (context) => AuthCubit(),

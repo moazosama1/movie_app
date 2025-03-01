@@ -22,7 +22,7 @@ class CustomBannerImageNetworkBg extends StatelessWidget {
       decoration: BoxDecoration(
           image: DecorationImage(
         fit: BoxFit.fill,
-        opacity: 0.5,
+        opacity: 0.65,
         image: previewItem?.posterPath != null
             ? CachedNetworkImageProvider(
                 ApiUrl.getImageFullPath(imagePath: previewItem?.posterPath)!)

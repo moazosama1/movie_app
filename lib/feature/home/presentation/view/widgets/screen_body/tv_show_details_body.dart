@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/error/custom_error_widget.dart';
 import 'package:movie_app/core/function/custom_function.dart';
+import 'package:movie_app/core/function/custom_function_url.dart';
+import 'package:movie_app/core/shimmer/loading/custom_widget_loading.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/banner_widget/custom_banner_item_details.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/card_widget/custom_season_card.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_movie_details_info.dart';
@@ -26,8 +29,7 @@ class TvShowDetailsBody extends StatelessWidget {
             // TODO: Handle this case.
             throw UnimplementedError();
           case TvShowDetailsLoading():
-            return SizedBox(
-                height: 230, child: Center(child: CircularProgressIndicator()));
+            return CustomWidgetLoading();
           case TvShowDetailsSuccess():
             return CustomScrollView(
               physics: BouncingScrollPhysics(),
@@ -58,6 +60,12 @@ class TvShowDetailsBody extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               iconTitle: Icons.play_arrow_outlined,
                               title: "Play",
+                              onTapDetails: () async {
+                                CustomFunctionUrl.openUrlFunction(context,
+                                    urlItem: state.tvShowDetailsModel?.homepage,
+                                    theme: theme,
+                                    mediaQueryWidth: mediaQueryWidth);
+                              },
                               previewItemModel: CustomFunction
                                   .getPreviewItemTvShowFromTvDetailsModel(
                                       tvItem: state.tvShowDetailsModel),
@@ -122,13 +130,7 @@ class TvShowDetailsBody extends StatelessWidget {
               ],
             );
           case TvShowDetailsFailure():
-            return Center(
-                child: SizedBox(
-              child: Text(
-                state.errorMessage,
-                style: theme.textTheme.titleMedium,
-              ),
-            ));
+            return CustomErrorWidget(errorMessage: state.errorMessage);
         }
       },
     );

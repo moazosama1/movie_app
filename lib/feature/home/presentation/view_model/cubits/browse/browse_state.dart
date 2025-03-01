@@ -5,6 +5,7 @@ sealed class BrowseState {}
 
 final class BrowseInitial extends BrowseState {}
 
+// ignore: must_be_immutable
 final class BrowseSuccess extends BrowseState {
   List<MovieItem>? lastReleaseList;
   List<MovieItem>? listMovies;

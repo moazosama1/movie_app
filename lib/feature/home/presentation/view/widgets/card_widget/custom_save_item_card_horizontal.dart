@@ -26,7 +26,7 @@ class CustomSaveItemCardHorizontal extends StatelessWidget {
                           movieId: previewItemModel?.id ?? 0)
                       : CustomFavoriteFunction.deleteTvShoeItem(
                           tvId: previewItemModel?.id ?? 0));
-              await cubit.getWatchNewAllData();
+              await cubit.getWatchAllData();
             },
             backgroundColor: theme.colorScheme.secondary,
             foregroundColor: Colors.white,

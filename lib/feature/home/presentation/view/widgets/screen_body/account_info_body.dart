@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/error/custom_error_widget.dart';
+import 'package:movie_app/core/shimmer/custom_account_info_shimmer.dart';
 import 'package:movie_app/core/widgets/custom_button_large_app.dart';
 import 'package:movie_app/feature/auth/presentation/view/auth_view.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/banner_widget/custom_banner_account.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_account_info.dart';
-import 'package:movie_app/feature/home/presentation/view_model/cubits/saved_item/saved_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view_model/cubits/account_info/account_cubit.dart';
 import 'package:movie_app/feature/home/presentation/view_model/provider/main_provider.dart';
 import 'package:provider/provider.dart';
@@ -40,13 +40,14 @@ class AccountInfoBody extends StatelessWidget {
                       accountModel: state.accountModel,
                     );
                   case AccountLoading():
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return CustomAccountInfoShimmer();
                   case AccountFailure():
                     return CustomErrorWidget(
                       errorMessage: state.errorMessage,
                     );
+                  case AccountAddItemLoading():
+                    // TODO: Handle this case.
+                    throw UnimplementedError();
                 }
               },
             ),

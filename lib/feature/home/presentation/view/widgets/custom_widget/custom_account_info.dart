@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/api/api_url.dart';
+import 'package:movie_app/core/utils/image_path.dart';
 import 'package:movie_app/feature/auth/data/models/account_model/account_model.dart';
 
 class CustomAccountInfo extends StatelessWidget {
@@ -25,12 +27,22 @@ class CustomAccountInfo extends StatelessWidget {
               ),
             ),
             child: ClipOval(
-              child: Image.network(
-                ApiUrl.getImageFullPath(
+              child: CachedNetworkImage(
+                imageUrl: ApiUrl.getImageFullPath(
                     imagePath: accountModel?.avatar?.tmdb?.avatarPath)!,
                 height: 150,
                 width: 150,
                 fit: BoxFit.cover,
+                placeholder: (context, url) => Container(
+                  width: 150,
+                  height: 150,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                ),
+                errorWidget: (context, url, error) =>
+                    Image.asset(ImagePath.errorImage),
               ),
             ),
           ),

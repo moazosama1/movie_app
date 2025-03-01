@@ -6,11 +6,10 @@ sealed class SavedState {}
 final class SavedInitial extends SavedState {}
 
 final class SavedSuccess extends SavedState {
-  final AccountModel? accountModel;
   final List<MovieItem>? movieSaved;
   final List<TvShowItemModel>? tvShowSaved;
 
-  SavedSuccess({this.accountModel, this.movieSaved, this.tvShowSaved});
+  SavedSuccess({this.movieSaved, this.tvShowSaved});
 }
 
 final class SavedLoading extends SavedState {}

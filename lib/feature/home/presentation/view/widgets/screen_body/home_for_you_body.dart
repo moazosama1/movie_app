@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:movie_app/core/error/custom_error_widget.dart';
+import 'package:movie_app/core/shimmer/loading/custom_widget_loading.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_comedies.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_banner_widget.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/section/section_action_movie.dart';
@@ -75,10 +77,7 @@ class HomeForYouBody extends StatelessWidget {
               ],
             );
           case ForYouListLoading():
-            return SizedBox(
-              height: mediaQueryHeight * .4,
-              child: Center(child: CircularProgressIndicator()),
-            );
+            return CustomWidgetLoading();
           case ForYouListFailure():
             return CustomErrorWidget(
               errorMessage: state.errorMessage,

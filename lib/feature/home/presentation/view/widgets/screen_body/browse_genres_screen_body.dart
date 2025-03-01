@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/error/custom_error_widget.dart';
 import 'package:movie_app/core/function/custom_function.dart';
+import 'package:movie_app/core/shimmer/loading/custom_widget_loading.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/custom_widget/custom_view_more_movie.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_items.dart';
 import 'package:movie_app/feature/home/presentation/view/widgets/list_widget/custom_list_large_items.dart';
@@ -75,13 +76,7 @@ class BrowseGenresScreenBody extends StatelessWidget {
               ],
             );
           case BrowseLoading():
-            return SizedBox(
-              height: 200,
-              width: double.infinity,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
+            return CustomWidgetLoading();
           case BrowseFailure():
             return CustomErrorWidget(
               errorMessage: state.errorMessage,

@@ -11,6 +11,7 @@ class CustomButtonDetailsMovie extends StatelessWidget {
       {super.key,
       this.mainAxisAlignment,
       required this.title,
+      this.isLoading = false,
       this.onTapDetails,
       this.onTapAddToFavorite,
       required this.previewItemModel,
@@ -18,6 +19,7 @@ class CustomButtonDetailsMovie extends StatelessWidget {
   final MainAxisAlignment? mainAxisAlignment;
   final String title;
   final IconData iconTitle;
+  final bool isLoading;
   void Function()? onTapDetails;
   void Function()? onTapAddToFavorite;
   PreviewItemModel? previewItemModel;
@@ -32,6 +34,7 @@ class CustomButtonDetailsMovie extends StatelessWidget {
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.spaceEvenly,
       children: [
         CustomButtonApp(
+          isLoading: isLoading,
           title: title,
           color: theme.colorScheme.primary,
           icon: iconTitle,
@@ -43,7 +46,7 @@ class CustomButtonDetailsMovie extends StatelessWidget {
               title: "Add to List",
               color: theme.colorScheme.secondary,
               icon: Icons.add,
-              isLoading: state is AccountLoading ? true : false,
+              isLoading: state is AccountAddItemLoading ? true : false,
               onTap: () async {
                 await cubitWatched.addItemsToFavorite(
                     addFavoriteModel: previewItemModel?.firstAirDate == null

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/api/api_url.dart';
 import 'package:movie_app/core/function/custom_function.dart';
@@ -38,10 +39,12 @@ class CustomMovieCardLarge extends StatelessWidget {
             fit: BoxFit.cover,
             image: (previewItemModel?.backdropPath != null ||
                     previewItemModel?.posterPath != null)
-                ? NetworkImage(ApiUrl.getImageFullPath(
-                    imagePath: previewItemModel?.backdropPath ??
-                        previewItemModel?.posterPath)!)
-                : AssetImage(ImagePath.errorImage),
+                ? CachedNetworkImageProvider(
+                    ApiUrl.getImageFullPath(
+                        imagePath: previewItemModel?.backdropPath ??
+                            previewItemModel?.posterPath)!,
+                  )
+                : AssetImage(ImagePath.errorImage) as ImageProvider,
           ),
         ),
         child: Column(

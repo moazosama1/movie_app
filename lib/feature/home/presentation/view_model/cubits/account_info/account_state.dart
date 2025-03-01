@@ -13,6 +13,8 @@ final class AccountSuccess extends AccountState {
 
 final class AccountLoading extends AccountState {}
 
+final class AccountAddItemLoading extends AccountState {}
+
 final class AccountFailure extends AccountState {
   final String errorMessage;
 

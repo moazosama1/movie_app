@@ -8,25 +8,25 @@ class CustomErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     var theme = Theme.of(context);
-    return Column(
-      spacing: 16,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: mediaQueryHeight * 0.3,
-        ),
-        Image.asset(
-          ImagePath.errorImageIcon,
-          width: 100,
-          color: theme.colorScheme.surface,
-        ),
-        Text(
-          errorMessage,
-          style: theme.textTheme.labelLarge,
-          textAlign: TextAlign.center,
-        ),
-      ],
+    return SizedBox(
+      height: mediaQueryHeight,
+      child: Column(
+        spacing: 16,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
+            ImagePath.errorImageIcon,
+            width: 100,
+            color: theme.colorScheme.surface,
+          ),
+          Text(
+            errorMessage,
+            style: theme.textTheme.labelLarge,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     ); // Replace with your desired widget
   }
 }

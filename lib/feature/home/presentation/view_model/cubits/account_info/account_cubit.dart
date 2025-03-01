@@ -25,7 +25,7 @@ class AccountCubit extends Cubit<AccountState> {
   }
 
   addItemsToFavorite({required FavoriteRequestModel? addFavoriteModel}) async {
-    emit(AccountLoading());
+    emit(AccountAddItemLoading());
     int? accountId = await getAccountId();
     var data = await favoriteRepo.favoriteAccount(
         accountId: accountId!, addFavoriteModel: addFavoriteModel);

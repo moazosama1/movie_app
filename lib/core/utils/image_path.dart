@@ -1,7 +1,7 @@
 class ImagePath {
   static const String splashScreenImage = "assets/image/splash.png";
   static const String bgAuthImage = "assets/image/bgAuth.png";
-  static const String logoApp2Image = "assets/logo/logo.png";
+  static const String logoAppSvg = "assets/logo/Movie_logo.svg";
   static const String searchIcon = "assets/icon/search-2.svg";
   static const String homeIcon = "assets/icon/home_icon.svg";
   static const String bookMarkIcon = "assets/icon/Icon ionic-md-bookmarks.svg";
@@ -11,16 +11,11 @@ class ImagePath {
   static const String errorImageIcon = "assets/icon/errorImage.png";
   static const String tComingSoonImage = "assets/image/coming_sone_test.png";
   static const String ratingIcon = "assets/icon/rating.svg";
-  static const String tActionImage = "assets/image/test_image_action.png";
-  static const String tCoverItemLImage =
-      "assets/image/test_card_cover_large.png";
-  static const String tCoverItemSImage =
-      "assets/image/test_card_cover_small.png";
-  static const String tChildrenImage = "assets/image/test_children_card.png";
-  static const String tCover2Image = "assets/image/tCoverImage2.png";
-  static const String tMovieBgImage = "assets/image/tMovieBg.jpg";
-  static const String tMoviePosterImage = "assets/image/tMoviePoster.jpg";
-  static const String tMovieCardImage = "assets/image/tMovieCard2.png";
   static const String previewAccountImage = "assets/image/preview_account.png";
   static const String searchResultImage = "assets/image/searching_result.png";
+  static const String savedResultImage = "assets/image/saved_item.png";
+  static const String onboarding1Image = "assets/image/onboarding_1.jpg";
+  static const String onboarding2Image = "assets/image/onboarding_2.jpg";
+  static const String onboarding3Image = "assets/image/onboarding_3.jpg";
+  static const String onboarding4Image = "assets/image/onboarding_4.jpg";
 }

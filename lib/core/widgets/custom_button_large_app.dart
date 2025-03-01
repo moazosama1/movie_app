@@ -17,7 +17,7 @@ class CustomButtonLargeApp extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
             color: color ?? theme.colorScheme.primary,
-            borderRadius: BorderRadius.circular(10)),
+            borderRadius: BorderRadius.circular(25)),
         child: Center(
             child: !isLoading
                 ? Text(

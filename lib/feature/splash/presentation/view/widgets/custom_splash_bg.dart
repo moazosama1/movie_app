@@ -16,7 +16,7 @@ class CustomSplashBg extends StatelessWidget {
             image: DecorationImage(
                 image: AssetImage(ImagePath.splashScreenImage),
                 fit: BoxFit.cover,
-                opacity: 0.6)),
+                opacity: .8)),
         child: child);
   }
 }

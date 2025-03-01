@@ -14,7 +14,6 @@ class AuthBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-
     return SafeArea(
       child: Stack(
         children: [
@@ -23,10 +22,9 @@ class AuthBody extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Spacer(
-                  flex: 4,
+                  flex: 9,
                 ),
                 CustomTextRich(),
                 SizedBox(
@@ -56,7 +54,7 @@ class AuthBody extends StatelessWidget {
                     );
                   },
                 ),
-                Spacer(),
+                SizedBox(height: 70),
               ],
             ),
           ),
